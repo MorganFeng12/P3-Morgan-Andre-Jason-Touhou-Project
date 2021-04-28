@@ -9,7 +9,7 @@ public class Driver {
 		System.out.println("hi");
 		
 		for (int i = 0; i < 5; i++) {
-			System.out.println("Wus Goodie");
+			System.out.println("Wus Goodies");
 			
 		}
 
