@@ -18,11 +18,16 @@ public class Ball {
 
 	public void paint(Graphics g) {
 		g.setColor(this.c);
-		g.fillOval(x, y, width, width);
+		g.fillOval(x, y, width, width);		
+		x += vx;
 
 	}
 
 	public void moveRight() {
-		x += 5;
+		vx = 1;
+	}
+	
+	public void stop() {
+		vx = 0;
 	}
 }

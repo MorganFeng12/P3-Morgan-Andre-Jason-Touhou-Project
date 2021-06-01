@@ -61,14 +61,28 @@ public class Driver extends JPanel implements ActionListener, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		b.moveRight();
+		System.out.println(arg0.getKeyCode());
+		if(arg0.getKeyCode() == 68) {
+			b.moveRight();
+		}
+
+		switch(arg0.getKeyCode()) {
+		//if keycode is 'd' key
+		case 68:
+			b.moveRight();
+			break;
 		
+		case 65:
+			System.out.println("stuff for left using a");
+			break;
+		}
 		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
+		b.stop();
 		
 	}
 	
