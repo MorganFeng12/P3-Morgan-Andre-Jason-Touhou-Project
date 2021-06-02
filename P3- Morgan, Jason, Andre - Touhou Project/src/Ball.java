@@ -15,6 +15,18 @@ public class Ball {
 		c = new Color(50, 50, 50);
 
 	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public int getWdith() {
+		return width;
+	}
 
 	public void paint(Graphics g) {
 		g.setColor(this.c);
