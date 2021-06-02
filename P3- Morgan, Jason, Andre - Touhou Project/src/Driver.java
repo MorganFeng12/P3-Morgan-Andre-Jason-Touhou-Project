@@ -18,6 +18,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Timer animationTimer; 
 	Desert d;
 	Ball b;
+	Character c;
 	
 	
 	public void paint(Graphics g) {
@@ -34,7 +35,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	}
 	
 	public Driver() {
-		JFrame f = new JFrame("Example Drawing");
+		JFrame f = new JFrame("Touhou Project");
 		f.setSize(800, 600); //width and height
 		
 		//set default action for x button
@@ -60,7 +61,11 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		//instantiate the rest of the instance variables
 		b = new Ball();
 		
+		c = new Character("naruto.png");
+		
 		d = new Desert("desert1.gif");
+		
+		
 		
 		f.setVisible(true);
 		
