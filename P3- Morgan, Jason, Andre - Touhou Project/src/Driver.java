@@ -109,29 +109,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void mouseClicked(MouseEvent m) {
-		// TODO Auto-generated method stub
-		System.out.println("clicked");
-		
-		Rectangle bR = new Rectangle(b.getX(), b.getY(), b.getWdith(), b.getWdith());
-		Rectangle mR = new Rectangle(m.getX(), m.getY(), 50, 50);
-		
-		if(bR.intersects(mR)) {
-			System.out.println("collision!");
-		}
-		
-		
-		
-	}
-	
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override
