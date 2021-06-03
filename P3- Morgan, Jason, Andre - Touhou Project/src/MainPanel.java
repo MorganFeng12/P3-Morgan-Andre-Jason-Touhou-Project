@@ -6,11 +6,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class MainPanel extends JPanel implements ActionListener{
 	//handles drawing animation
 	Timer animationTimer; 
 	Ball b;
+	Sasuke sasuke;
 	
 	public void paint(Graphics g) {
 		//calling this line ensures the frame is redrawn
@@ -18,6 +25,7 @@ public class MainPanel extends JPanel implements ActionListener{
 		
 		//call paint methods of objects or through g.drawRect etc
 		b.paint(g);
+
 		
 	}
 	
@@ -47,7 +55,7 @@ public class MainPanel extends JPanel implements ActionListener{
 		
 		//instantiate the rest of the instance variables
 		b = new Ball();
-		
+
 		
 		f.setVisible(true);
 	}

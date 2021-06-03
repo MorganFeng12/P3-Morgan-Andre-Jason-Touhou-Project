@@ -19,17 +19,19 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Desert d;
 	Ball b;
 	Character c;
+	Sasuke s;
 	
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		
-		b.paint(g);
+
 	  	
 		//g.setColor(Color.blue);
 		//g.fillOval(x, 0, 200, 200);
 		//x += 2;
 		d.paint(g);
+		s.paint(g);
 		
 		
 	}
@@ -59,10 +61,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		animationTimer.start();
 		
 		//instantiate the rest of the instance variables
-		b = new Ball();
+
 		
 		c = new Character("naruto.png");
-		
+		s = new Sasuke("Sasuke.png");
 		d = new Desert("desert1.gif");
 		
 		
@@ -80,21 +82,19 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		System.out.println(arg0.getKeyCode());
-		if(arg0.getKeyCode() == 68) {
-			b.moveRight();
-		}
-
-		switch(arg0.getKeyCode()) {
-		//if keycode is 'd' key
-		case 68:
-			b.moveRight();
-			break;
+System.out.println(arg0.getKeyCode());
 		
-		case 65:
-			System.out.println("stuff for left using a");
+		switch (arg0.getKeyCode()) {
+		case 87:
+			//move the left paddle up
+			s.moveUp();
+			System.out.println("case 87");
 			break;
+		case 83:
+			s.moveDown();
+			System.out.println("case 83");
+			break;
+
 		}
 		
 	}
@@ -102,7 +102,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		b.stop();
+
 		
 	}
 	
@@ -140,6 +140,18 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
