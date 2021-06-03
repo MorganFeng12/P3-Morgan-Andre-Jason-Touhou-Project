@@ -20,7 +20,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Ball b;
 	Character c;
 	Sasuke s;
-	
+	Sasuke s2;
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
