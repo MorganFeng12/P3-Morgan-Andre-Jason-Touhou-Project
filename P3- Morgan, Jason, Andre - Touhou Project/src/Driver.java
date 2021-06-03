@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -16,21 +17,47 @@ import javax.swing.Timer;
 public class Driver extends JPanel implements ActionListener, KeyListener, MouseListener, MouseMotionListener{
 	//handles drawing animation
 	Timer animationTimer; 
-	Desert d;
+	Background d;
+	Background i;
+	Background forest;
 	Ball b;
 	Character c;
-	
+	Font verdana = new Font("Verdana", Font.BOLD, 80);
+	Font verdana1 = new Font("Verdana", Font.BOLD, 50);
+	private int count = 0;
+	private int boss = 0;
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		
-		b.paint(g);
+		//b.paint(g);
 	  	
 		//g.setColor(Color.blue);
 		//g.fillOval(x, 0, 200, 200);
 		//x += 2;
-		d.paint(g);
 		
+		if(boss == 0){
+			d.paint(g);
+		}
+		
+		if(boss == 1) {
+			i.paint(g);
+		}
+		
+		if(boss == 2) {
+			forest.paint(g);
+		}
+		
+		if(count == 0) {
+			g.setFont(verdana);
+			g.setColor(Color.blue);
+			g.drawString("Touhou Project" , 55, 200);
+			g.setFont(verdana1);
+			g.setColor(Color.orange);
+			g.fillRect(220, 335, 360, 100);
+			g.setColor(Color.black);
+			g.drawString("Start Game", 240, 400);	
+		}
 		
 	}
 	
@@ -61,11 +88,11 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		//instantiate the rest of the instance variables
 		b = new Ball();
 		
-		c = new Character("naruto.png");
+		d = new Background("desert1.gif");
 		
-		d = new Desert("desert1.gif");
+		i = new Background("ice1.gif");
 		
-		
+		forest = new Background("Forest.gif");
 		
 		f.setVisible(true);
 		
@@ -81,7 +108,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println(arg0.getKeyCode());
+		//System.out.println(arg0.getKeyCode());
 		if(arg0.getKeyCode() == 68) {
 			b.moveRight();
 		}
@@ -115,13 +142,13 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void mouseClicked(MouseEvent m) {
 		// TODO Auto-generated method stub
-		System.out.println("clicked");
+		//System.out.println("clicked");
 		
-		Rectangle bR = new Rectangle(b.getX(), b.getY(), b.getWdith(), b.getWdith());
-		Rectangle mR = new Rectangle(m.getX(), m.getY(), 50, 50);
+		Rectangle bR = new Rectangle(220, 365, 360, 150);
+		Rectangle mR = new Rectangle(m.getX(), m.getY(), 100, 100);
 		
 		if(bR.intersects(mR)) {
-			System.out.println("collision!");
+			count++;
 		}
 		
 		
