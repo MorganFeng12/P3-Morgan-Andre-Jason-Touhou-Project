@@ -57,8 +57,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			g.fillRect(220, 335, 360, 100);
 			g.setColor(Color.black);
 			g.drawString("Start Game", 240, 400);	
-		}
-		
+		} 
+		 
 	}
 	
 	public Driver() {
