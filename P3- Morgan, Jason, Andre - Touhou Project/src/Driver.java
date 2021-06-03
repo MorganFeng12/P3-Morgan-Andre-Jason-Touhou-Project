@@ -20,7 +20,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Background d;
 	Background i;
 	Background forest;
-	Ball b;
 	Character c;
 	Font verdana = new Font("Verdana", Font.BOLD, 80);
 	Font verdana1 = new Font("Verdana", Font.BOLD, 50);
@@ -57,8 +56,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			g.fillRect(220, 335, 360, 100);
 			g.setColor(Color.black);
 			g.drawString("Start Game", 240, 400);	
-		} 
-		 
+		}
+		
 	}
 	
 	public Driver() {
@@ -86,7 +85,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		animationTimer.start();
 		
 		//instantiate the rest of the instance variables
-		b = new Ball();
 		
 		d = new Background("desert1.gif");
 		
@@ -110,13 +108,11 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		// TODO Auto-generated method stub
 		//System.out.println(arg0.getKeyCode());
 		if(arg0.getKeyCode() == 68) {
-			b.moveRight();
 		}
 
 		switch(arg0.getKeyCode()) {
 		//if keycode is 'd' key
 		case 68:
-			b.moveRight();
 			break;
 		
 		case 65:
@@ -129,10 +125,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		b.stop();   
-		
 	}
-	 
+	
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
