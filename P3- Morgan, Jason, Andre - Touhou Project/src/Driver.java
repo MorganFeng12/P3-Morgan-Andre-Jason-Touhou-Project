@@ -129,7 +129,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		b.stop();
+		b.stop();  
 		
 	}
 	
