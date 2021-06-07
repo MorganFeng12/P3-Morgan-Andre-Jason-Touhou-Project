@@ -42,4 +42,7 @@ public class Ball {
 	public void stop() {
 		vx = 0;
 	}
+
 }
+
+

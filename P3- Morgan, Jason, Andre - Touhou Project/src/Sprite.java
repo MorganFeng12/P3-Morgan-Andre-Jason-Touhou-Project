@@ -13,7 +13,7 @@ public abstract class Sprite{
 	protected int x, y; // location
 	protected int width; 
 	protected int height;
-	
+
 	public Sprite(String fileName) {
 		// assignment statements for attributes
 		img = getImage(fileName); //load the image
@@ -57,6 +57,14 @@ public abstract class Sprite{
 	public void update() {
 		tx.setToTranslation(x, y);
 	}
+	
+	public void moveUp() {
+		y -= 15;
+	}
+	
+	public void moveDown() {
+		y += 15;
+	}
 
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
 
@@ -65,6 +73,14 @@ public abstract class Sprite{
 		Graphics2D g2 = (Graphics2D) g;
 		update();
 		g2.drawImage(img, tx, null);
+
+		
+		if(y <0) {
+			y = 0;
+		}
+		if (y > 430) {
+			y = 430;
+		}
 		
 	}
 
