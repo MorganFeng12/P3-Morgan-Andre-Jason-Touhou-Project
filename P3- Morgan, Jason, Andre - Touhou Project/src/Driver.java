@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+
 public class Driver extends JPanel implements ActionListener, KeyListener, MouseListener, MouseMotionListener{
 	//handles drawing animation
 	Timer animationTimer; 
@@ -21,6 +22,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Character c;
 	Sasuke s;
 	Sasuke s2;
+	Music m1;
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -66,11 +68,13 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		c = new Character("naruto.png");
 		s = new Sasuke("Sasuke.png");
 		d = new Desert("desert1.gif");
-		
+		m1 = new Music("Naruto1.wav", true);
+		m1.play();
 		
 		
 		f.setVisible(true);
 		
+
 	}
 
 	/* this method is invoked/called by the timer*/ 
