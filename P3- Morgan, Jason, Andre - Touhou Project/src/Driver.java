@@ -23,6 +23,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Sasuke s;
 	Sasuke s2;
 	Music m1;
+	int score = 0;
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -32,7 +33,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		//g.setColor(Color.blue);
 		//g.fillOval(x, 0, 200, 200);
 		//x += 2;
+		if (score < 100) {
 		d.paint(g);
+		}
 		s.paint(g);
 		
 		
@@ -73,6 +76,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		
 		
 		f.setVisible(true);
+
 		
 
 	}
@@ -90,7 +94,7 @@ System.out.println(arg0.getKeyCode());
 		
 		switch (arg0.getKeyCode()) {
 		case 87:
-			//move the left paddle up
+			//move the avatar up and down
 			s.moveUp();
 			System.out.println("case 87");
 			break;
