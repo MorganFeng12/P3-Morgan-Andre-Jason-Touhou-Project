@@ -26,10 +26,14 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Font verdana2 = new Font("Verdana", Font.BOLD, 35);
 	private int count = 0;
 	private int boss = 0;
-	Sasuke s;
 	Heart h1, h2, h3;
-	Sasuke s2;
 	Music m1;
+	
+	Enemy e;
+	Ball b;
+	Ball2[] obj;
+	Ball3[] obj2; 
+	Ball4[] obj3;
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -41,7 +45,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		// x += 2;
 
 		d.paint(g);
-		s.paint(g);
+		//s.paint(g);
 
 		if (boss == 0) {
 			d.paint(g);
@@ -65,9 +69,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			g.setColor(Color.black);
 			g.drawString("Start Game", 240, 400);
 		}
-		
-		if(count > 0) {
-			s.paint(g);
+
+		if (count > 0) {
+			//s.paint(g);
 			h1.paint(g);
 			h2.setX(h1.getX() + 45);
 			h2.paint(g);
@@ -76,8 +80,26 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			g.setFont(verdana2);
 			g.setColor(Color.black);
 			g.drawString("Lives: ", 15, 45);
-		
-			
+		}
+		b.paint(g);
+		e.paint(g);
+
+		int ax = e.getX();
+		int ay = e.getY();
+
+		for (Ball2 obje : obj) {
+			obje.update(ax, ay);
+			obje.paint(g);
+		}
+
+		for (Ball3 objec : obj2) {
+			objec.update(ax, ay);
+			objec.paint(g);
+		}
+
+		for (Ball4 object : obj3) {
+			object.update(ax, ay);
+			object.paint(g);
 		}
 
 	}
@@ -113,16 +135,54 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		forest = new Background("Forest.gif");
 
 		c = new Character("naruto.png");
-		s = new Sasuke("Sasuke.png");
+		//s = new Sasuke("Sasuke.png");
 		d = new Background("desert1.gif");
 		m1 = new Music("Naruto1.wav", true);
 		m1.play();
 		h1 = new Heart("heart (2).png");
 		h2 = new Heart("heart (2).png");
 		h3 = new Heart("heart (2).png");
-	
+		obj = new Ball2[10];
+		obj2 = new Ball3[10];
+		obj3 = new Ball4[10];
+
+		// -------------------------------
+
+		b = new Ball("Sasuke.png");
+
+		e = new Enemy();
+
+		for (int i = 0; i < 10; i++) {
+			obj[i] = new Ball2();
+		}
+
+		for (int j = 0; j < 10; j++) {
+			obj2[j] = new Ball3();
+		}
+
+		for (int k = 0; k < 10; k++) {
+			obj3[k] = new Ball4();
+		}
 
 		f.setVisible(true);
+
+	}
+
+	
+	// stuff for collision
+	public void update() {
+		// calls collide
+		for (int i = 0; i < obj.length; i++) {
+			b.collide(obj[i]);
+		}
+
+		for (int i = 0; i < obj2.length; i++) {
+			b.collide(obj2[i]);
+		}
+
+		for (int i = 0; i < obj3.length; i++) {
+			b.collide(obj3[i]);
+		}
 
 	}
 
@@ -130,7 +190,11 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// call the frame to refresh
+		update();
+		
 		repaint();
+		
+
 	}
 
 	@Override
@@ -141,12 +205,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		switch (arg0.getKeyCode()) {
 		case 87:
 			// move the left paddle up
-			s.moveUp();
-			//System.out.println("case 87");
+			b.moveUp();
+			// System.out.println("case 87");
 			break;
 		case 83:
-			s.moveDown();
-			//System.out.println("case 83");
+			b.moveDown();
+			// System.out.println("case 83");
 			break;
 
 		}
