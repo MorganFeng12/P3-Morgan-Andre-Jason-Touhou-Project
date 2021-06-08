@@ -11,6 +11,7 @@ public abstract class Sprite{
 	protected Image img; // image for sprite
 	protected Image alternate;
 	protected int x, y; // location
+	protected int vx, vy;
 	protected int width; 
 	protected int height;
 
@@ -56,14 +57,19 @@ public abstract class Sprite{
 	// gets image and process it
 	public void update() {
 		tx.setToTranslation(x, y);
+		
 	}
 	
 	public void moveUp() {
+		if (y > 0) {
 		y -= 8;
+		}
 	}
 	
 	public void moveDown() {
+		if (y < 430) {
 		y += 8;
+		}
 	}
 
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
@@ -75,12 +81,7 @@ public abstract class Sprite{
 		g2.drawImage(img, tx, null);
 
 		
-		if(y <0) {
-			y = 0;
-		}
-		if (y > 430) {
-			y = 430;
-		}
+
 		
 	}
 
