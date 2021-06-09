@@ -28,9 +28,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	private int boss = 0;
 	Heart h1, h2, h3;
 	Music m1;
-	
-	Enemy e;
-	Ball b;
+	int score = 0;
+	Enemy[] enemies = new Enemy[10];
+	AndreEnemy e;
+	Player b;
 	Ball2[] obj;
 	Ball3[] obj2; 
 	Ball4[] obj3;
@@ -44,6 +45,11 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		// g.fillOval(x, 0, 200, 200);
 		// x += 2;
 
+	  	
+		//g.setColor(Color.blue);
+		//g.fillOval(x, 0, 200, 200);
+		//x += 2;
+		if (score < 100) {
 		d.paint(g);
 		//s.paint(g);
 
@@ -81,6 +87,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			g.setColor(Color.black);
 			g.drawString("Lives: ", 15, 45);
 		}
+		
 		b.paint(g);
 		e.paint(g);
 
@@ -93,8 +100,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		}
 
 		for (Ball3 objec : obj2) {
-			objec.update(ax, ay);
-			objec.paint(g);
+				objec.update(ax, ay);
+				objec.paint(g);
 		}
 
 		for (Ball4 object : obj3) {
@@ -102,6 +109,13 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			object.paint(g);
 		}
 
+		for (int i = 0; i < enemies.length; i++) {
+			enemies[i].paint(g);
+		}
+		}
+		//s.paint(g);
+		
+		
 	}
 
 	public Driver() {
@@ -125,6 +139,13 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 		// setup animation timer
 		animationTimer = new Timer(16, this);
+		
+		//connect JFrame to MouseMotionListener if necessary
+		
+		
+		//setup animation timer
+		animationTimer = new Timer(30, this);
+
 		animationTimer.start();
 
 		// instantiate the rest of the instance variables
@@ -139,6 +160,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		d = new Background("desert1.gif");
 		m1 = new Music("Naruto1.wav", true);
 		m1.play();
+
 		h1 = new Heart("heart (2).png");
 		h2 = new Heart("heart (2).png");
 		h3 = new Heart("heart (2).png");
@@ -148,9 +170,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 		// -------------------------------
 
-		b = new Ball("Sasuke.png");
+		b = new Player("Sasuke.png");
 
-		e = new Enemy();
+		e = new AndreEnemy(); 
 
 		for (int i = 0; i < 10; i++) {
 			obj[i] = new Ball2();
@@ -163,6 +185,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		for (int k = 0; k < 10; k++) {
 			obj3[k] = new Ball4();
 		}
+
+		for (int i = 0; i < enemies.length; i++) {
+			enemies[i] = new Enemy("Flyingbat125.gif");
+
+		}
+		
 
 		f.setVisible(true);
 
@@ -189,11 +217,13 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	/* this method is invoked/called by the timer */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+
 		// call the frame to refresh
 		update();
 		
+
+		//call the frame to refresh
 		repaint();
-		
 
 	}
 
@@ -204,9 +234,14 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 		switch (arg0.getKeyCode()) {
 		case 87:
+
 			// move the left paddle up
 			b.moveUp();
 			// System.out.println("case 87");
+
+			//move the avatar up and down
+			//s.moveUp();
+			System.out.println("case 87");
 			break;
 		case 83:
 			b.moveDown();

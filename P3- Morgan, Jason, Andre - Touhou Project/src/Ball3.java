@@ -69,16 +69,6 @@ public class Ball3 { //2nd line of balls that shoot out from the block
 		radius = newWidth;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public void paint(Graphics g) {
 		
 		update(); //call method that helps with updating vars

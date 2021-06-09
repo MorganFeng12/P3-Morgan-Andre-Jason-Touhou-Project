@@ -39,14 +39,6 @@ public class Ball4 { //3rd line of balls that shoot out from the block
 	} 
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	// --------------------------------> stuff for collision <-----------------------------------------
 	public int getWidth() {
 		return radius;
@@ -71,14 +63,6 @@ public class Ball4 { //3rd line of balls that shoot out from the block
 	public void setWidth(int newWidth) {
 		radius = newWidth;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
