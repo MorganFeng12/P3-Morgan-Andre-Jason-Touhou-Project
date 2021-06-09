@@ -18,7 +18,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	//handles drawing animation
 	Timer animationTimer; 
 	Desert d;
-	Ball b;
+
 	Character c;
 	Sasuke s;
 	Sasuke s2;
@@ -72,7 +72,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		//instantiate the rest of the instance variables
 
 		
-		c = new Character("naruto.png");
+
 		s = new Sasuke("Sasuke.png");
 		d = new Desert("desert1.gif");
 		m1 = new Music("Naruto1.wav", true);

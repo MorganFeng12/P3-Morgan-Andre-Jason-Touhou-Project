@@ -1,4 +1,3 @@
-
 public class Sasuke extends Sprite{
 
 	public Sasuke(String fileName) {
