@@ -23,6 +23,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Sasuke s;
 	Sasuke s2;
 	Music m1;
+	int score = 0;
+	Enemy[] enemies = new Enemy[10];
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -32,7 +34,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		//g.setColor(Color.blue);
 		//g.fillOval(x, 0, 200, 200);
 		//x += 2;
+		if (score < 100) {
 		d.paint(g);
+		for (int i = 0; i < enemies.length; i++) {
+			enemies[i].paint(g);
+		}
+		}
 		s.paint(g);
 		
 		
@@ -59,7 +66,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		
 		
 		//setup animation timer
-		animationTimer = new Timer(16, this);
+		animationTimer = new Timer(30, this);
 		animationTimer.start();
 		
 		//instantiate the rest of the instance variables
@@ -71,8 +78,14 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		m1 = new Music("Naruto1.wav", true);
 		m1.play();
 		
+		for (int i = 0; i < enemies.length; i++) {
+			enemies[i] = new Enemy("Flyingbat125.gif");
+
+		}
+		
 		
 		f.setVisible(true);
+
 		
 
 	}
@@ -80,8 +93,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	/* this method is invoked/called by the timer*/ 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+
 		//call the frame to refresh
 		repaint();
+		
 	}
 
 	@Override
@@ -90,7 +105,7 @@ System.out.println(arg0.getKeyCode());
 		
 		switch (arg0.getKeyCode()) {
 		case 87:
-			//move the left paddle up
+			//move the avatar up and down
 			s.moveUp();
 			System.out.println("case 87");
 			break;
