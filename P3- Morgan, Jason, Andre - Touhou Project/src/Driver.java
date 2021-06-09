@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -25,6 +26,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Music m1;
 	int score = 0;
 	Enemy[] enemies = new Enemy[10];
+
+	ArrayList<Bullets> shotBullets;
+	ArrayList<Bullets> bullets;
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -41,6 +45,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		}
 		}
 		s.paint(g);
+		
+		for (int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).paint(g);
+		}
 		
 		
 	}
@@ -66,7 +74,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		
 		
 		//setup animation timer
-		animationTimer = new Timer(30, this);
+		animationTimer = new Timer(16, this);
 		animationTimer.start();
 		
 		//instantiate the rest of the instance variables
@@ -83,6 +91,16 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 		}
 		
+		
+		
+		bullets = new ArrayList<Bullets>();
+		shotBullets = new ArrayList<Bullets>();
+		
+		for (int i = 0; i <= 5; i++) {
+			Bullets b = new Bullets("Fireball.png");
+			bullets.add(b);
+			
+		}
 		
 		f.setVisible(true);
 
@@ -101,17 +119,17 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-System.out.println(arg0.getKeyCode());
+
 		
 		switch (arg0.getKeyCode()) {
 		case 87:
 			//move the avatar up and down
 			s.moveUp();
-			System.out.println("case 87");
+
 			break;
 		case 83:
 			s.moveDown();
-			System.out.println("case 83");
+
 			break;
 
 		}

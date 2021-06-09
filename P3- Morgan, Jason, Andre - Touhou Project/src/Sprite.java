@@ -90,6 +90,80 @@ public abstract class Sprite{
 		y += 8;
 		}
 	}
+	
+public boolean collide(Bullets obj) {
+    	
+    	//represent both objects as Rectangles, 
+    	//use the intersect command to check for collision
+    	
+    	Rectangle r1 = new Rectangle(x, y, width, width); 
+    	
+    	//r2 is Ball2
+    	Rectangle r2 = new Rectangle(obj.getX(), obj.getY(), 
+    			obj.getWidth(), obj.getWidth());
+    	
+    	if(r1.intersects(r2)) {
+    		//do something    
+    		
+    	}
+    	
+    	return r1.intersects(r2);
+    }
+    
+    public boolean collide(Sasuke obj2) {
+    	
+    	//represent both objects as Rectangles, 
+    	//use the intersect command to check for collision
+    	
+    	Rectangle r1 = new Rectangle(x, y, width, width); 
+    	
+    	//r2 is Ball3
+    	Rectangle r2 = new Rectangle(obj2.getX(), obj2.getY(), 
+    			obj2.getWidth(), obj2.getWidth());
+    	
+    	if(r1.intersects(r2)) {
+    		//do something    
+    		
+    	}
+    	
+    	return r1.intersects(r2);
+    }
+    
+   public boolean collide(Enemy obj3) {
+    	
+    	//represent both objects as Rectangles, 
+    	//use the intersect command to check for collision
+    	
+    	Rectangle r1 = new Rectangle(x, y, width, width); 
+    	
+    	//r2 is Ball4
+    	Rectangle r2 = new Rectangle(obj3.getX(), obj3.getY(), 
+    			obj3.getWidth(), obj3.getWidth());
+    	
+    	if(r1.intersects(r2)) {
+    		//do something    		
+    	}
+    	
+    	return r1.intersects(r2);
+    }
+   
+   public boolean collide(EnemyBullets obj3) {
+   	
+   	//represent both objects as Rectangles, 
+   	//use the intersect command to check for collision
+   	
+   	Rectangle r1 = new Rectangle(x, y, width, width); 
+   	
+   	//r2 is Ball4
+   	Rectangle r2 = new Rectangle(obj3.getX(), obj3.getY(), 
+   			obj3.getWidth(), obj3.getWidth());
+   	
+   	if(r1.intersects(r2)) {
+   		//do something    		
+   	}
+   	
+   	return r1.intersects(r2);
+   }
 
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
 
