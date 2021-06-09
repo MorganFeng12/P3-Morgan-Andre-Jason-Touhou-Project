@@ -1,27 +1,18 @@
+<<<<<<< HEAD
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+=======
+>>>>>>> branch 'Jason_Branch' of https://github.com/MorganFeng12/P3-Morgan-Andre-Jason-Touhou-Project.git
 
-public class Enemy extends Sprite{
-
-
-	public Enemy(String fileName) {
-		super(fileName);
-		// TODO Auto-generated constructor stub
-		vy = 0;
-		vx =-7;
-		x = 750;
-		y = (int) (Math.random()* 450-25);
-		width = 150;
-		height = 150;
-		stopDist = (int) (Math.random()*301+425);
-		Enemy = true;
-		
 	}
 	
 	public int getX() {
 		return x;
 	}
+<<<<<<< HEAD
 	
 }
+=======
+>>>>>>> branch 'Jason_Branch' of https://github.com/MorganFeng12/P3-Morgan-Andre-Jason-Touhou-Project.git

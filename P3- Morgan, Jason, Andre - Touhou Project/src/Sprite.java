@@ -82,6 +82,7 @@ public abstract class Sprite{
 	
 	public void moveUp() {
 
+<<<<<<< HEAD
 		y -= 15;
 
 		if (y > 0) {
@@ -97,6 +98,8 @@ public abstract class Sprite{
 		if (y < 430) {
 		y += 8;
 		}
+=======
+>>>>>>> branch 'Jason_Branch' of https://github.com/MorganFeng12/P3-Morgan-Andre-Jason-Touhou-Project.git
 	}
 
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
