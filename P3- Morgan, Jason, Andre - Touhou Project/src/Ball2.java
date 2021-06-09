@@ -17,7 +17,7 @@ public class Ball2 { //the balls that shoot out from the block
 	private double a;
 	private int ex, ey;
 	
-	
+	 
 	
 	
 	public Ball2() {
