@@ -81,15 +81,7 @@ public abstract class Sprite{
 	
 	
 	public void moveUp() {
-		if (y > 0) {
-		y -= 8;
-		}
-	}
-	
-	public void moveDown() {
-		if (y < 430) {
-		y += 8;
-		}
+
 	}
 
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
