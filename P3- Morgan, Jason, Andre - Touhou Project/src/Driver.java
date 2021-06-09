@@ -24,7 +24,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Sasuke s2;
 	Music m1;
 	int score = 0;
-	Enemy[] enemies = new Enemy[1];
+	Enemy[] enemies = new Enemy[10];
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -79,7 +79,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		m1.play();
 		
 		for (int i = 0; i < enemies.length; i++) {
-			enemies[i] = new Enemy("Flyingbat.gif");
+			enemies[i] = new Enemy("Flyingbat125.gif");
+
 		}
 		
 		
@@ -95,6 +96,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 		//call the frame to refresh
 		repaint();
+		
 	}
 
 	@Override

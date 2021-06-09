@@ -11,15 +11,18 @@ public abstract class Sprite{
 	protected Image img; // image for sprite
 	protected Image alternate;
 	protected int x, y; // location
+	protected boolean Enemy;
 	protected int vx, vy;
 	protected int width; 
 	protected int height;
+	protected int stopDist;
 
 	public Sprite(String fileName) {
 		// assignment statements for attributes
 		img = getImage(fileName); //load the image
+
 		init(x, y); //initialize the x,y position of the image
-		
+
 	}
 	
 	public int getX() {
@@ -45,6 +48,10 @@ public abstract class Sprite{
 	public void setWidth(int width) {
 		this.width = width;
 	}
+	
+	public void setStopDist(int stopDist) {
+		this.stopDist = stopDist;
+	}
 
 	public int getHeight() {
 		return height;
@@ -57,8 +64,21 @@ public abstract class Sprite{
 	// gets image and process it
 	public void update() {
 		tx.setToTranslation(x, y);
-		
+		x += vx;
+		y += vy;
+		if (x < stopDist && Enemy && vx != 0) {
+			vx = 0;
+			vy = (int) (Math.random()*20-10);
+			while (vy <= 5 && vy >= -5) {
+				vy = (int) (Math.random()*20-10);
+			}
+			
+		}
+		if (y <=  -25|| y >= 500 && Enemy) {
+			vy *= -1;
+		}
 	}
+	
 	
 	public void moveUp() {
 		if (y > 0) {
@@ -79,6 +99,10 @@ public abstract class Sprite{
 		Graphics2D g2 = (Graphics2D) g;
 		update();
 		g2.drawImage(img, tx, null);
+		
+		
+		
+		
 
 		
 
