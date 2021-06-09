@@ -28,6 +28,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	private int boss = 0;
 	Heart h1, h2, h3;
 	Music m1;
+	int score = 0;
+	Enemy[] enemies = new Enemy[10];
 	
 	Enemy e;
 	Ball b;
@@ -37,70 +39,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-
-		// b.paint(g);
-
-		// g.setColor(Color.blue);
-		// g.fillOval(x, 0, 200, 200);
-		// x += 2;
-
-		d.paint(g);
-		//s.paint(g);
-
-		if (boss == 0) {
-			d.paint(g);
-		}
-
-		if (boss == 1) {
-			i.paint(g);
-		}
-
-		if (boss == 2) {
-			forest.paint(g);
-		}
-
-		if (count == 0) {
-			g.setFont(verdana);
-			g.setColor(Color.blue);
-			g.drawString("Touhou Project", 55, 200);
-			g.setFont(verdana1);
-			g.setColor(Color.orange);
-			g.fillRect(220, 335, 360, 100);
-			g.setColor(Color.black);
-			g.drawString("Start Game", 240, 400);
-		}
-
-		if (count > 0) {
-			//s.paint(g);
-			h1.paint(g);
-			h2.setX(h1.getX() + 45);
-			h2.paint(g);
-			h3.setX(h2.getX() + 45);
-			h3.paint(g);
-			g.setFont(verdana2);
-			g.setColor(Color.black);
-			g.drawString("Lives: ", 15, 45);
-		}
-		b.paint(g);
-		e.paint(g);
-
-		int ax = e.getX();
-		int ay = e.getY();
-
-		for (Ball2 obje : obj) {
-			obje.update(ax, ay);
-			obje.paint(g);
-		}
-
-		for (Ball3 objec : obj2) {
-			objec.update(ax, ay);
-			objec.paint(g);
-		}
-
-		for (Ball4 object : obj3) {
-			object.update(ax, ay);
-			object.paint(g);
-		}
 
 	}
 
@@ -121,10 +59,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		// connect JFrame to mouse listening code
 		f.addMouseListener(this);
 
-		// connect JFrame to MouseMotionListener if necessary
 
-		// setup animation timer
-		animationTimer = new Timer(16, this);
 		animationTimer.start();
 
 		// instantiate the rest of the instance variables
@@ -139,32 +74,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		d = new Background("desert1.gif");
 		m1 = new Music("Naruto1.wav", true);
 		m1.play();
-		h1 = new Heart("heart (2).png");
-		h2 = new Heart("heart (2).png");
-		h3 = new Heart("heart (2).png");
-		obj = new Ball2[10];
-		obj2 = new Ball3[10];
-		obj3 = new Ball4[10];
 
-		// -------------------------------
-
-		b = new Ball("Sasuke.png");
-
-		e = new Enemy();
-
-		for (int i = 0; i < 10; i++) {
-			obj[i] = new Ball2();
-		}
-
-		for (int j = 0; j < 10; j++) {
-			obj2[j] = new Ball3();
-		}
-
-		for (int k = 0; k < 10; k++) {
-			obj3[k] = new Ball4();
-		}
-
-		f.setVisible(true);
 
 	}
 
@@ -189,11 +99,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	/* this method is invoked/called by the timer */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// call the frame to refresh
-		update();
-		
-		repaint();
-		
 
 	}
 
@@ -204,9 +109,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 		switch (arg0.getKeyCode()) {
 		case 87:
-			// move the left paddle up
-			b.moveUp();
-			// System.out.println("case 87");
+
 			break;
 		case 83:
 			b.moveDown();
