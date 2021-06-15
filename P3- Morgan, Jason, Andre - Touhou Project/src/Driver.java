@@ -39,7 +39,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 
-<<<<<<< HEAD
 		// b.paint(g);
 
 		// g.setColor(Color.blue);
@@ -115,10 +114,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		}
 		}
 		//s.paint(g);
-		
-		
-=======
->>>>>>> branch 'Jason_Branch' of https://github.com/MorganFeng12/P3-Morgan-Andre-Jason-Touhou-Project.git
+
 	}
 
 	public Driver() {
@@ -137,7 +133,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 		// connect JFrame to mouse listening code
 		f.addMouseListener(this);
-<<<<<<< HEAD
+
 
 		// connect JFrame to MouseMotionListener if necessary
 
@@ -149,13 +145,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		
 		//setup animation timer
 		animationTimer = new Timer(30, this);
-=======
->>>>>>> branch 'Jason_Branch' of https://github.com/MorganFeng12/P3-Morgan-Andre-Jason-Touhou-Project.git
 
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'Jason_Branch' of https://github.com/MorganFeng12/P3-Morgan-Andre-Jason-Touhou-Project.git
 		animationTimer.start();
 
 		// instantiate the rest of the instance variables
@@ -171,7 +161,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		m1 = new Music("Naruto1.wav", true);
 		m1.play();
 
-<<<<<<< HEAD
 		h1 = new Heart("heart (2).png");
 		h2 = new Heart("heart (2).png");
 		h3 = new Heart("heart (2).png");
@@ -204,8 +193,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		
 
 		f.setVisible(true);
-=======
->>>>>>> branch 'Jason_Branch' of https://github.com/MorganFeng12/P3-Morgan-Andre-Jason-Touhou-Project.git
 
 	}
 
@@ -231,7 +218,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
-<<<<<<< HEAD
 		// call the frame to refresh
 		update();
 		
@@ -239,8 +225,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		//call the frame to refresh
 		repaint();
 
-=======
->>>>>>> branch 'Jason_Branch' of https://github.com/MorganFeng12/P3-Morgan-Andre-Jason-Touhou-Project.git
 	}
 
 	@Override
@@ -251,7 +235,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		switch (arg0.getKeyCode()) {
 		case 87:
 
-<<<<<<< HEAD
 			// move the left paddle up
 			b.moveUp();
 			// System.out.println("case 87");
@@ -259,8 +242,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			//move the avatar up and down
 			//s.moveUp();
 			System.out.println("case 87");
-=======
->>>>>>> branch 'Jason_Branch' of https://github.com/MorganFeng12/P3-Morgan-Andre-Jason-Touhou-Project.git
 			break;
 		case 83:
 			b.moveDown();
