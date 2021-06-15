@@ -1,5 +1,7 @@
 public class Runner {
 	public static void main(String[] args) {
+		//runs the project
+		
 		Driver driver = new Driver();
 
 		try {
@@ -16,3 +18,4 @@ public class Runner {
 	
 
 }
+
