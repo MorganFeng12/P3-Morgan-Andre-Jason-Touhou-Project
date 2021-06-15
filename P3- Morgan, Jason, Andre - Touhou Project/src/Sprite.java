@@ -73,10 +73,11 @@ public abstract class Sprite {
 		y += vy;
 		if (x < stopDist && Enemy && vx != 0) {
 			vx = 0;
-			vy = (int) (Math.random() * 6 - 3);
-			while (vy <= 5 && vy >= -5) {
-				vy = (int) (Math.random() * 20 - 10);
+			vy = (int) (Math.random() * 14 - 7);
+			while (vy <= 3 && vy >= -3) {
+				vy = (int) (Math.random() * 14 - 7);
 			}
+			
 
 		}
 		if (y <= -25 || y >= 500 && Enemy) {

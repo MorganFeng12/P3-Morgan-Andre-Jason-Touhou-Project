@@ -24,7 +24,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Sasuke s2;
 	Music m1;
 	int score = 0;
-	Enemy[] enemies = new Enemy[10];
+	Enemy[] enemies = new Enemy[20];
 
 	int cntr = 0;
 
