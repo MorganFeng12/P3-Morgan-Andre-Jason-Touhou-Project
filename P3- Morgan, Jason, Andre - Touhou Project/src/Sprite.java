@@ -93,6 +93,7 @@ public abstract class Sprite {
 	}
 
 	public void moveUp() {
+
 		if (y > 0) {
 			y -= 8;
 		}
@@ -179,6 +180,7 @@ public abstract class Sprite {
 		}
 
 		return r1.intersects(r2);
+
 	}
 
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);

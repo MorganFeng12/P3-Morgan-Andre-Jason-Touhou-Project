@@ -33,6 +33,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 
+
 		d.paint(g);
 		for (int i = 0; i < enemies.length; i++) {
 			enemies[i].paint(g);
@@ -61,6 +62,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		int sY = s.getY();
 
 		b.update(sX+150,sY+60);
+
 	}
 
 
@@ -84,10 +86,11 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		// connect JFrame to mouse listening code
 		f.addMouseListener(this);
 
-		// connect JFrame to MouseMotionListener if necessary
+
 
 		// setup animation timer
 		animationTimer = new Timer(16, this);
+
 		animationTimer.start();
 
 		// instantiate the rest of the instance variables
@@ -98,6 +101,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		b = new Bullets("Fireball.png");
 		m1.play();
 
+
 		for (int i = 0; i < enemies.length; i++) {
 			enemies[i] = new Enemy("Flyingbat125.gif");
 
@@ -106,14 +110,24 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 		f.setVisible(true);
 
+
 	}
+
+	
+	// stuff for collision
+
+
+
+	
 
 	/* this method is invoked/called by the timer */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
+
 		// call the frame to refresh
 		repaint();
+
 
 	}
 
@@ -122,8 +136,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 		switch (arg0.getKeyCode()) {
 		case 87:
+
 			// move the avatar up and down
 			s.moveUp();
+
 
 			break;
 		case 83:

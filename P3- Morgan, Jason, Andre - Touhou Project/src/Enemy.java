@@ -1,3 +1,4 @@
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -15,10 +16,13 @@ public class Enemy extends Sprite {
 		stopDist = (int) (Math.random() * 301 + 425);
 		Enemy = true;
 
+
 	}
 
 	public int getX() {
 		return x;
 	}
 
+
 }
+
