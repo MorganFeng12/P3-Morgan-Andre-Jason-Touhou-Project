@@ -1,5 +1,4 @@
-
-public class Sasuke extends Sprite{
+public class Sasuke extends Sprite {
 
 	public Sasuke(String fileName) {
 		super(fileName);
@@ -7,8 +6,7 @@ public class Sasuke extends Sprite{
 		width = 150;
 		height = 153;
 		y = 150;
-
-		
+		Enemy = false;
 
 	}
 
