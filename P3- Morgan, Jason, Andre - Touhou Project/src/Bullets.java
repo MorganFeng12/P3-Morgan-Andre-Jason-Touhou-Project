@@ -1,10 +1,10 @@
 
 public class Bullets extends Sprite {
-
+	//reads the file
 	public Bullets(String fileName) {
 		super(fileName);
-
-		vx = 8;
+		//instantiation of all the instance variables
+		vx = 4;
 		width = 10;
 		height = 25;
 		
@@ -15,3 +15,4 @@ public class Bullets extends Sprite {
 	}
 
 }
+
