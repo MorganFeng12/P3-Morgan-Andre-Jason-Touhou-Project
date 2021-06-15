@@ -12,6 +12,7 @@ public abstract class Sprite {
 	protected int x, y; // location
 	protected boolean Enemy;
 	protected boolean bullet;
+	protected boolean bmove;
 	protected int vx, vy;
 	protected int width;
 	protected int height;
@@ -28,6 +29,9 @@ public abstract class Sprite {
 
 	public int getX() {
 		return x;
+	}
+	public int getVX() {
+		return vx;
 	}
 
 	public void setX(int x) {
@@ -75,37 +79,45 @@ public abstract class Sprite {
 		tx.setToTranslation(x, y);
 		x += vx;
 		y += vy;
+		//moves the enemeis in from off their screen until they reach the desired stop distance
+		//where they oscillate up and down at varied velocities
 		if (x < stopDist && Enemy && vx != 0) {
 			vx = 0;
-			vy = (int) (Math.random() * 14 - 7);
+			vy = (int) (Math.random() * 10 - 5);
 			while (vy <= 3 && vy >= -3) {
-				vy = (int) (Math.random() * 14 - 7);
+				vy = (int) (Math.random() * 10 - 5);
 			}
 			
 
 		}
-		if (y <= -25 || y >= 500 && Enemy) {
+		//differntiate between the small enemy and boss boundaries to make sure they stay on the screen
+		if (y <= -25 || y >= 500 && Enemy && bmove == false) {
 			vy *= -1;
 		}
+		if(bmove == true) {
+			if (y <= -50 || y >= 400) {
+				vy *= -1;
+			}
+		}
 		
-		if ((bullet && x >= 800) || (bullet && x <= -100)) {
+		//if the bullet runs off the screen, it is reshot
+		if ((bullet && x >= 800) || (bullet && x <= 0)) {
 			x = sX;
 			y = sY;
 		}
 		
 
 	}
-
+	//moves player up 
 	public void moveUp() {
-
 		if (y > 0) {
-			y -= 8;
+			y -= 50;
 		}
 	}
-
+	//moves player down
 	public void moveDown() {
 		if (y < 430) {
-			y += 8;
+			y += 50;
 		}
 	}
 
@@ -114,7 +126,7 @@ public abstract class Sprite {
 		sY = y1;
 
 	}
-
+	//collide with the object and the players bullets
 	public boolean collide(Bullets obj) {
 
 		// represent both objects as Rectangles,
@@ -129,7 +141,24 @@ public abstract class Sprite {
 
 		return r1.intersects(r2);
 	}
+	
+	//collision with the boss
+	public boolean collide(Boss obj8) {
 
+		// represent both objects as Rectangles,
+		// use the intersect command to check for collision
+
+		Rectangle r1 = new Rectangle(x, y, width, width);
+
+		// r2 is Ball2
+		Rectangle r2 = new Rectangle(obj8.getX(), obj8.getY(), obj8.getWidth(), obj8.getWidth());
+
+
+
+		return r1.intersects(r2);
+	}
+	
+	//collision with the player
 	public boolean collide(Sasuke obj2) {
 
 		// represent both objects as Rectangles,
@@ -145,6 +174,7 @@ public abstract class Sprite {
 		return r1.intersects(r2);
 	}
 
+	//collision with the bat enemies
 	public boolean collide(Enemy obj3) {
 
 		// represent both objects as Rectangles,
@@ -160,7 +190,7 @@ public abstract class Sprite {
 		return r1.intersects(r2);
 	}
 	
-
+	//collision with enemybullets
 	public boolean collide(EnemyBullets obj3) {
 
 		// represent both objects as Rectangles,
@@ -175,6 +205,7 @@ public abstract class Sprite {
 		return r1.intersects(r2);
 
 	}
+	
 
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
 
@@ -183,7 +214,7 @@ public abstract class Sprite {
 		Graphics2D g2 = (Graphics2D) g;
 		update();
 		g2.drawImage(img, tx, null);
-
+		
 	}
 
 	private void init(double a, double b) {
@@ -210,3 +241,4 @@ public abstract class Sprite {
 	}
 
 }
+
