@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -18,181 +19,237 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	// handles drawing animation
 	Timer animationTimer;
 	Desert d;
-
+	Background i;
+	Background forest;
 	Character c;
+	Font verdana = new Font("Verdana", Font.BOLD, 80);
+	Font verdana1 = new Font("Verdana", Font.BOLD, 50);
+	Font verdana2 = new Font("Verdana", Font.BOLD, 35);
+	int count = 0;
+	int boss = 0;
 	Sasuke s;
-	Sasuke s2;
-	Music m1;
+	Music m1, m2;
 	int score = 0;
-	Enemy[] enemies = new Enemy[13];
-	Enemy e1 = new Enemy("FlyingBat125.gif");
-	Enemy e2 = new Enemy("FlyingBat125.gif");
-	Enemy e3 = new Enemy("FlyingBat125.gif");
-	Enemy e4 = new Enemy("FlyingBat125.gif");
-	Enemy e5 = new Enemy("FlyingBat125.gif");
-	Enemy e6 = new Enemy("FlyingBat125.gif");
-	Enemy e7 = new Enemy("FlyingBat125.gif");
-//	Enemy e8 = new Enemy("FlyingBat125.gif");
-//	Enemy e9 = new Enemy("FlyingBat125.gif");
-//	Enemy e10 = new Enemy("FlyingBat125.gif");
-
+	int end = 0;
+	int lives = 20;
+	int bosslives = 6;
+	int bosslives2 = 6;
+	int mouseclicked = 0;
+	Enemy[] enemies = new Enemy[10];
+	Enemy[] enemies2 = new Enemy[10];
+	BossBullets[] naruto = new BossBullets[3];
+	BossBullets[] zab = new BossBullets[3];
+	Enemy[] bats = new Enemy[7];
+	int[] eX = new int[7];
+	int[] eY = new int[7];
+	Boss boss1;
+	Boss boss2;
 	int cntr = 0;
-
 	Bullets b;
-	EnemyBullets b1 = new EnemyBullets("Fireball.png");
-	EnemyBullets b2 = new EnemyBullets("Fireball.png");
-	EnemyBullets b3 = new EnemyBullets("Fireball.png");
-	EnemyBullets b4 = new EnemyBullets("Fireball.png");
-	EnemyBullets b5 = new EnemyBullets("Fireball.png");
-	EnemyBullets b6 = new EnemyBullets("Fireball.png");
-	EnemyBullets b7 = new EnemyBullets("Fireball.png");
-	EnemyBullets b8 = new EnemyBullets("Fireball.png");
-	EnemyBullets b9 = new EnemyBullets("Fireball.png");
-	EnemyBullets b10 = new EnemyBullets("Fireball.png");
+	EnemyBullets[] bull = new EnemyBullets[7];
+	EnemyBullets[] bull2 = new EnemyBullets[7];
+	Enemy[] bats2 = new Enemy[7];
+	int[] eX2 = new int[7];
+	int[] eY2 = new int[7];
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 
-		d.paint(g);
-		for (int i = 0; i < enemies.length; i++) {
-			enemies[i].paint(g);
-
+		//loading in the background 
+		if (boss == 0) {
+			d.paint(g);
+		} else {
+			i.paint(g);
 		}
 
-		s.paint(g);
+		//launching the loading screen
+		if (count == 0) {
+			g.setFont(verdana);
+			g.setColor(Color.blue);
+			g.drawString("Touhou Project", 55, 200);
+			g.setFont(verdana1);
+			g.setColor(Color.orange);
+			g.fillRect(220, 335, 360, 100);
+			g.setColor(Color.black);
+			g.drawString("Start Game", 240, 400);
+		}
+		//first wave of enemies and bosses
+		if (count == 1) {
+			//spawning in the 10 non-shooting enemies  and sensing if the players bullets collide
+			//if there is collision, the enemies are teleported off and the score increases
+			for (int i = 0; i < enemies.length; i++) {
+				enemies[i].paint(g);
 
-		b.paint(g);
-		e1.paint(g);
-		e2.paint(g);
-		e3.paint(g);
-		e4.paint(g);
-		e5.paint(g);
-		e6.paint(g);
-		e7.paint(g);
-//		e8.paint(g);
-//		e9.paint(g);
-//		e10.paint(g);
-		b1.paint(g);
-		b2.paint(g);
-		b3.paint(g);
-		b4.paint(g);
-		b5.paint(g);
-		b6.paint(g);
-		b7.paint(g);
-		b8.paint(g);
-		b9.paint(g);
-		b10.paint(g);
-		
-		if (b1.collide(s)) {
-			//filler
-		}
-		
-		if (b2.collide(s)) {
-			//filler
-		}
-		if (b3.collide(s)) {
-			//filler
-		}
-		if (b4.collide(s)) {
-			//filler
-		}
-		if (b5.collide(s)) {
-			//filler
-		}
-		if (b6.collide(s)) {
-			//filler
-		}
-		if (b7.collide(s)) {
-			//filler
-		}
-		
-		if (b.collide(e1)) {
-			e1.setX(-5000);
-			e1.setY((int) (Math.random()*10000-5000));
-		}
-		
-		if (b.collide(e2)) {
-			e2.setX(-5000);
-			e2.setY((int) (Math.random()*10000-5000));
-		}
-		
-		if (b.collide(e3)) {
-			e3.setX(-5000);
-			e3.setY((int) (Math.random()*10000-5000));
-		}
-		
-		if (b.collide(e4)) {
-			e4.setX(-5000);
-			e4.setY((int) (Math.random()*10000-5000));
-		}
-		
-		if (b.collide(e5)) {
-			e5.setX(-5000);
-			e5.setY((int) (Math.random()*10000-5000));
-		}
-		
-		if (b.collide(e6)) {
-			e6.setX(-5000);
-			e6.setY((int) (Math.random()*10000-5000));
-		}
-		
-		if (b.collide(e7)) {
-			e7.setX(-5000);
-			e7.setY((int) (Math.random()*10000-5000));
-		}
-		
+				if (b.collide(enemies[i])) {
 
-		for (int i = 0; i < enemies.length; i++) {
+					enemies[i].setX(-5000);
+					enemies[i].setY((int) (Math.random() * 10000));
+					score++;
+				}
 
-			if (b.collide(enemies[i])) {
+			}
+			//putting the lives and score system onto the screen
+			g.setFont(verdana2);
+			g.setColor(Color.black);
+			g.drawString("Lives: " + lives, 15, 45);
+			g.drawString("Score: " + score, 300, 45);
 
-				System.out.println("Hi");
+			s.paint(g);
 
-				enemies[i].setX(-5000);
-				enemies[i].setY((int) (Math.random() * 10000));
-				score++;
+			b.paint(g);
+			
+			//painting the shooting enemies, which also includes the collision mechanism, where if the 
+			//players bullet collides with the enemy, they are teleported off and the score increases
+			//also, if the shooting enemies bullet hits the player, the player loses a life
+			
+			for (int i = 0; i < 7; i++) {
+				bats[i].paint(g);
+				bull[i].paint(g);
+				if (bull[i].collide(s)) {
+					lives--;
+					bull[i].setY(2000);
+					bull[i].setX(6000);
+				}
+				if (b.collide(bats[i])) {
+					bats[i].setY(-5000);
+					score++;
+				}
+				eX[i] = bats[i].getX();
+				eY[i] = bats[i].getY();
+				bull[i].update(eX[i], eY[i]);
+			}
+
+			b.paint(g);
+
+			int sX = s.getX();
+			int sY = s.getY();
+			b.update(sX + 150, sY + 60);
+			int sX1 = s.getX();
+			int sY1 = s.getY();
+			b.update(sX1 + 150, sY1 + 60);
+
+			//once the first wave is done, this part spawns in the boss
+			if (score == 17) {
+				boss1.paint(g);
+				int nX = boss1.getX();
+				int nY = boss1.getY();
+				//detects the boss's bullets collision with the player
+				for (int i = 0; i < naruto.length; i++) {
+					naruto[i].update(nX, nY);
+					naruto[i].paint(g);
+					if (naruto[i].collide(s)) {
+						lives--;
+						naruto[i].setX(-5000);
+
+					}
+				}
+				//if player bullets collides with the boss, it removes a bosslive, and since the boss has 6 lives
+				//once its lives are 0, it will be teleported off the screen and the score increases by 10
+				if (b.collide(boss1)) {
+					b.setX(2000);
+					b.setY(-2000);
+					bosslives--;
+					if (bosslives == 0) {
+						boss1.setX(5000);
+						boss1.setY(-2000);
+						score += 10;
+					}
+				}
+
+			}
+			
+			//once boss killed, the new background is loaded in as well the 7 new shooting enemies
+			if (score >= 27) {
+				boss++;
+				for (int i = 0; i < 7; i++) {
+					bats2[i].paint(g);
+					bull2[i].paint(g);
+					eX2[i] = bats2[i].getX();
+					eY2[i] = bats2[i].getY();
+					bull2[i].update(eX2[i], eY2[i]);
+				}
+				//collision with the player, if it hits, lives goes down 1 and the bullet is teleported
+				for (int i = 0; i < bull2.length; i++) {
+					if (bull2[i].collide(s)) {
+						lives--;
+						bull2[i].setX(-5000);
+					}
+				}
+				//if the players bullets hits the bat, the score goes up and the bat is teleported off
+				for (int i = 0; i < bats2.length; i++) {
+					if (b.collide(bats2[i])) {
+						score++;
+						b.setX(5000);
+						bats2[i].setX(-50000);
+						bats2[i].setY(50000);
+
+					}
+				}
+
+			}
+			//once the second wave of small enemies is over, the second boss spawns
+			if (score > 33) {
+				boss2.paint(g);
+				int nX1 = boss2.getX();
+				//boss bullets collision with player
+				int nY1 = boss2.getY();
+				for (int i = 0; i < zab.length; i++) {
+					zab[i].update(nX1, nY1);
+					zab[i].paint(g);
+					if (zab[i].collide(s)) {
+						lives--;
+						zab[i].setX(-5000);
+
+					}
+				//player bullets collision with boss
+					if (b.collide(boss2)) {
+						b.setX(2000);
+						b.setY(-2000);
+						bosslives2--;
+						if (bosslives2 == 0) {
+							boss2.setX(10000);
+							boss2.setY(-3000);
+							score += 10;
+						}
+					}
+
+				}
+			}
+			//44 is the max score, so if it is reached, the player has beat the game and the end screen pops up
+			if (score >= 44) {
+				count++;
+
+			}
+
+			//if the player has 0 lives, it has died, and the game is also over
+			if (lives <= 0) {
+				count++;
+
 			}
 
 		}
+		if (count == 2) {
+			//if the player died, it prints a try again sign
+			if (lives == 0) {
+				g.setColor(Color.orange);
+				g.fillRect(70, 130, 650, 300);
+				g.setFont(verdana);
+				g.setColor(Color.black);
+				g.drawString("Game Over", 142, 250);
+				g.setFont(verdana1);
+				g.drawString("Try Again Next Time!", 100, 350);
+			} 
+			//if the player didn't die, they beat the game and a congratulations sign pops up
+			else {
+				g.setColor(Color.orange);
+				g.fillRect(70, 130, 650, 300);
+				g.setFont(verdana);
+				g.setColor(Color.black);
+				g.drawString("Game Over", 142, 250);
+				g.drawString("Good Job!", 168, 350);
 
-		int sX = s.getX();
-		int sY = s.getY();
-
-		int e1X = e1.getX();
-		int e1Y = e1.getY();
-		int e2X = e2.getX();
-		int e2Y = e2.getY();
-		int e3X = e3.getX();
-		int e3Y = e3.getY();
-		int e4X = e4.getX();
-		int e4Y = e4.getY();
-		int e5X = e5.getX();
-		int e5Y = e5.getY();
-		int e6X = e6.getX();
-		int e6Y = e6.getY();
-		int e7X = e7.getX();
-		int e7Y = e7.getY();
-//		int e8X = e8.getX();
-//		int e8Y = e8.getY();
-//		int e9X = e9.getX();
-//		int e9Y = e9.getY();
-//		int e10X = e10.getX();
-//		int e10Y = e10.getY();
-		
-		b1.update(e1X, e1Y);
-		b2.update(e2X, e2Y);
-		b3.update(e3X, e3Y);
-		b4.update(e4X, e4Y);
-		b5.update(e5X, e5Y);
-		b6.update(e6X, e6Y);
-		b7.update(e7X, e7Y);
-//		b8.update(e8X, e8Y);
-//		b9.update(e9X, e9Y);
-//		b10.update(e10X, e10Y);
-//		
-
-		b.update(sX + 150, sY + 60);
-
+			}
+		}
 	}
 
 	public Driver() {
@@ -212,22 +269,60 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		// connect JFrame to mouse listening code
 		f.addMouseListener(this);
 
+		// connect JFrame to MouseMotionListener if necessary
+
 		// setup animation timer
 		animationTimer = new Timer(16, this);
+
+		// connect JFrame to MouseMotionListener if necessary
+
 
 		animationTimer.start();
 
 		// instantiate the rest of the instance variables
-
 		s = new Sasuke("Sasuke.png");
-		d = new Desert("desert1.gif");
-		m1 = new Music("Touhou1.wav", true);
 		b = new Bullets("Fireball.png");
-		// m1.play();
+
+		i = new Background("ice1.gif");
+		forest = new Background("Forest.gif");
+		d = new Desert("desert1.gif");
+
+		m1 = new Music("Naruto1.wav", true);
+		m1.play();
+
+		//loops for all of teh arrays instantiating them as their specific png or gif
+		for (int i = 0; i < 7; i++) {
+			bats[i] = new Enemy("Bat6.png");
+		}
+
+		for (int b = 0; b < 3; b++) {
+			naruto[b] = new BossBullets("Fireball.png");
+		}
+
+		for (int c = 0; c < 3; c++) {
+			zab[c] = new BossBullets("Fireball.png");
+		}
+		for (int i = 0; i < bats2.length; i++) {
+			bats2[i] = new Enemy("Bat6.png");
+		}
+
+		for (int i = 0; i < bull2.length; i++) {
+			bull2[i] = new EnemyBullets("Fireball.png");
+		}
+
+		for (int k = 0; k < 7; k++) {
+			bull[k] = new EnemyBullets("Fireball.png");
+		}
+
+		boss1 = new Boss("naruto.png");
+		boss2 = new Boss("Zabuza4.png");
 
 		for (int i = 0; i < enemies.length; i++) {
-			enemies[i] = new Enemy("Flyingbat125.gif");
+			enemies[i] = new Enemy("Bat6.png");
 
+		}
+		for (int j = 0; j < enemies2.length; j++) {
+			enemies2[j] = new Enemy("Bat6.png");
 		}
 
 		f.setVisible(true);
@@ -247,11 +342,11 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-
+		//is w or s is pressed on the keyboard, the player moves up/down respectively
 		switch (arg0.getKeyCode()) {
 		case 87:
+			b.moveUp();
 
-			// move the avatar up and down
 			s.moveUp();
 
 			break;
@@ -309,8 +404,20 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(MouseEvent m) {
 		// TODO Auto-generated method stub
+		//checks if the user has pressed the start button, and if they have, launches up the game
+		if (count == 0) {
+			Rectangle bR = new Rectangle(220, 365, 360, 150);
+			Rectangle mR = new Rectangle(m.getX(), m.getY(), 200, 140);
+
+			if (bR.intersects(mR)) {
+				mouseclicked++;
+			}
+			if (mouseclicked == 1) {
+				count++;
+			}
+		}
 
 	}
 
