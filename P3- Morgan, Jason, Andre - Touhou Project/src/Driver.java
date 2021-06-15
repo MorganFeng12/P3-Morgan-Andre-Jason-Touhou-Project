@@ -27,7 +27,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Font verdana2 = new Font("Verdana", Font.BOLD, 35);
 	int count = 0;
 	int boss = 0;
-	Heart h1, h2, h3;
+	//Heart h1, h2, h3;
 	Sasuke s;
 	// Sasuke s2;
 	Music m1, m2;
@@ -42,32 +42,16 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Ball3[] obj2;
 	Ball4[] obj3;
 	Enemy[] enemies = new Enemy[10];
-	Enemy e1 = new Enemy("FlyingBat125.gif");
-	Enemy e2 = new Enemy("FlyingBat125.gif");
-	Enemy e3 = new Enemy("FlyingBat125.gif");
-	Enemy e4 = new Enemy("FlyingBat125.gif");
-	Enemy e5 = new Enemy("FlyingBat125.gif");
-	Enemy e6 = new Enemy("FlyingBat125.gif");
-	Enemy e7 = new Enemy("FlyingBat125.gif");
-	Enemy e8 = new Enemy("FlyingBat125.gif");
-	Enemy e9 = new Enemy("FlyingBat125.gif");
-	Enemy e10 = new Enemy("FlyingBat125.gif");
-
+	Enemy[] bats = new Enemy[7];
+	int[] eX = new int[7];
+	int[] eY = new int[7];
 	Boss boss1;
 
 	int cntr = 0;
 
 	Bullets b;
-	EnemyBullets b1 = new EnemyBullets("Fireball.png");
-	EnemyBullets b2 = new EnemyBullets("Fireball.png");
-	EnemyBullets b3 = new EnemyBullets("Fireball.png");
-	EnemyBullets b4 = new EnemyBullets("Fireball.png");
-	EnemyBullets b5 = new EnemyBullets("Fireball.png");
-	EnemyBullets b6 = new EnemyBullets("Fireball.png");
-	EnemyBullets b7 = new EnemyBullets("Fireball.png");
-	EnemyBullets b8 = new EnemyBullets("Fireball.png");
-	EnemyBullets b9 = new EnemyBullets("Fireball.png");
-	EnemyBullets b10 = new EnemyBullets("Fireball.png");
+
+	EnemyBullets[] bull = new EnemyBullets[7];
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -141,111 +125,39 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 					System.out.println("2");
 				}
 			}
+
+			for (int i = 0; i < 7; i++) {
+				bats[i].paint(g);
+			}
+
 			b.paint(g);
-			e1.paint(g);
-			e2.paint(g);
-			e3.paint(g);
-			e4.paint(g);
-			e5.paint(g);
-			e6.paint(g);
-			e7.paint(g);
-			b1.paint(g);
-			b2.paint(g);
-			b3.paint(g);
-			b4.paint(g);
-			b5.paint(g);
-			b6.paint(g);
-			b7.paint(g);
-			b8.paint(g);
-			b9.paint(g);
-			b10.paint(g);
 
-			if (b1.collide(s)) {
-				lives--;
-				b1.setX(2000);
-
-			}
-			if (b2.collide(s)) {
-				lives--;
-				b2.setX(2000);
-			}
-			if (b3.collide(s)) {
-				lives--;
-				b3.setX(2000);
-			}
-			if (b4.collide(s)) {
-				lives--;
-				b4.setX(2000);
-			}
-			if (b5.collide(s)) {
-				lives--;
-				b5.setX(2000);
-			}
-			if (b6.collide(s)) {
-				lives--;
-				b6.setX(2000);
-			}
-			if (b7.collide(s)) {
-				lives--;
-				b7.setX(2000);
+			for (int b = 0; b < 7; b++) {
+				bull[b].paint(g);
 			}
 
-			if (b.collide(e1)) {
-				e1.setX(-5000);
-				score++;
+			for (int p = 0; p < 7; p++) {
+				if (bull[p].collide(s)) {
+					lives--;
+					bull[p].setY(2000);
+					bull[p].setX(6000);
+				}
 			}
 
-			if (b.collide(e2)) {
-				e2.setX(-5000);
-				score++;
+			for (int j = 0; j < 7; j++) {
+				if (b.collide(bats[j])) {
+					bats[j].setY(-5000);
+					score++;
+				}
+			}
+			for (int n = 0; n < 7; n++) {
+				eX[n] = bats[n].getX();
+				eY[n] = bats[n].getY();
 			}
 
-			if (b.collide(e3)) {
-				e3.setX(-5000);
-				score++;
+			for (int h = 0; h < 7; h++) {
+				bull[h].update(eX[h], eY[h]);
 			}
-
-			if (b.collide(e4)) {
-				e4.setX(-5000);
-				score++;
-			}
-
-			if (b.collide(e5)) {
-				e5.setX(-5000);
-				score++;
-			}
-
-			if (b.collide(e6)) {
-				e6.setX(-5000);
-				score++;
-			}
-
-			if (b.collide(e7)) {
-				e7.setX(-5000);
-				score++;
-			}
-			int e1X = e1.getX();
-			int e1Y = e1.getY();
-			int e2X = e2.getX();
-			int e2Y = e2.getY();
-			int e3X = e3.getX();
-			int e3Y = e3.getY();
-			int e4X = e4.getX();
-			int e4Y = e4.getY();
-			int e5X = e5.getX();
-			int e5Y = e5.getY();
-			int e6X = e6.getX();
-			int e6Y = e6.getY();
-			int e7X = e7.getX();
-			int e7Y = e7.getY();
-
-			b1.update(e1X, e1Y);
-			b2.update(e2X, e2Y);
-			b3.update(e3X, e3Y);
-			b4.update(e4X, e4Y);
-			b5.update(e5X, e5Y);
-			b6.update(e6X, e6Y);
-			b7.update(e7X, e7Y);
 
 			b.update(sX + 150, sY + 60);
 			int sX1 = s.getX();
@@ -253,7 +165,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 			b.update(sX1 + 150, sY1 + 60);
 
-			if (score > 5) {
+			if (score > 16) {
 				boss1.paint(g);
 				boss++;
 
@@ -286,6 +198,11 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			g.drawString("Game Over", 142, 250);
 			g.setFont(verdana1);
 			g.drawString("Try Again Next Time!", 100, 350);
+			g.setColor(Color.orange);
+			g.fillRect(200, 450, 400, 110);
+			g.setFont(verdana1);
+			g.setColor(Color.black);
+			g.drawString("Play Again", 250, 520);
 
 		}
 
@@ -344,6 +261,13 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		obj2 = new Ball3[10];
 		obj3 = new Ball4[10];
 
+		for (int i = 0; i < 7; i++) {
+			bats[i] = new Enemy("FlyingBat125.gif");
+		}
+
+		for (int k = 0; k < 7; k++) {
+			bull[k] = new EnemyBullets("Fireball.png");
+		}
 		// -------------------------------
 
 		// p1 = new Player("Sasuke.png");

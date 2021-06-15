@@ -109,13 +109,13 @@ public abstract class Sprite {
 
 	public void moveUp() {
 		if (y > 0) {
-			y -= 25;
+			y -= 35;
 		}
 	}
 
 	public void moveDown() {
 		if (y < 430) {
-			y += 25;
+			y += 35;
 		}
 	}
 

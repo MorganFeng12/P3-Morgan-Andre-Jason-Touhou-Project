@@ -9,10 +9,8 @@ public class EnemyBullets extends Sprite {
 		x = 750;
 		y = (int) (Math.random()*700);
 	
-		vx = (int) (Math.random()*2 - 5);
-		
-
-
+		vx = (int) (Math.random()*2 - 7);
+	
 		Enemy = false;
 		bullet = true;
 	}

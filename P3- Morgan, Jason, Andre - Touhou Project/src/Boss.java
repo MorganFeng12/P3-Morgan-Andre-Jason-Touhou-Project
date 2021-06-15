@@ -7,7 +7,7 @@ public class Boss extends Sprite {
 		vy = 3;
 		vx = -7;
 		x = 550;
-		y = (int) (Math.random() * 450 - 25);
+		y = 250;
 		width = 150;
 		height = 150;
 		stopDist = 550;
