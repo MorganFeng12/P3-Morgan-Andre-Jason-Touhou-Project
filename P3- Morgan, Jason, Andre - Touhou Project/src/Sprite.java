@@ -12,6 +12,7 @@ public abstract class Sprite {
 	protected int x, y; // location
 	protected boolean Enemy;
 	protected boolean bullet;
+	protected boolean bmove;
 	protected int vx, vy;
 	protected int width;
 	protected int height;
@@ -80,16 +81,23 @@ public abstract class Sprite {
 		y += vy;
 		if (x < stopDist && Enemy && vx != 0) {
 			vx = 0;
-			vy = (int) (Math.random() * 14 - 7);
+			vy = (int) (Math.random() * 10 - 5);
 			while (vy <= 3 && vy >= -3) {
-				vy = (int) (Math.random() * 14 - 7);
+				vy = (int) (Math.random() * 10 - 5);
 			}
 			
 
 		}
-		if (y <= -25 || y >= 500 && Enemy) {
+		
+		if (y <= -25 || y >= 500 && Enemy && bmove == false) {
 			vy *= -1;
 		}
+		if(bmove == true) {
+			if (y <= -50 || y >= 400) {
+				vy *= -1;
+			}
+		}
+		
 		
 		if ((bullet && x >= 800) || (bullet && x <= 0)) {
 			x = sX;

@@ -4,7 +4,7 @@ public class Bullets extends Sprite {
 	public Bullets(String fileName) {
 		super(fileName);
 
-		vx = 5;
+		vx = 4;
 		width = 10;
 		height = 25;
 		
