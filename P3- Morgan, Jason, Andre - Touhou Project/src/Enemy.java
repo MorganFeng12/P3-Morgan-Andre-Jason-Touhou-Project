@@ -15,7 +15,7 @@ public class Enemy extends Sprite {
 		height = 150;
 		stopDist = (int) (Math.random() * 301 + 425);
 		Enemy = true;
-
+		bullet = false;
 
 	}
 
@@ -23,6 +23,4 @@ public class Enemy extends Sprite {
 		return x;
 	}
 
-
 }
-

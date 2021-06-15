@@ -53,6 +53,10 @@ public abstract class Sprite {
 	public void setStopDist(int stopDist) {
 		this.stopDist = stopDist;
 	}
+	
+	public int getStopDist() {
+		return stopDist;
+	}
 
 	public int getHeight() {
 		return height;
@@ -84,7 +88,7 @@ public abstract class Sprite {
 			vy *= -1;
 		}
 		
-		if (bullet && x >= 800) {
+		if ((bullet && x >= 800) || (bullet && x <= 0)) {
 			x = sX;
 			y = sY;
 		}
@@ -121,10 +125,7 @@ public abstract class Sprite {
 		// r2 is Ball2
 		Rectangle r2 = new Rectangle(obj.getX(), obj.getY(), obj.getWidth(), obj.getWidth());
 
-		if (r1.intersects(r2)) {
-			// do something
 
-		}
 
 		return r1.intersects(r2);
 	}
@@ -139,10 +140,7 @@ public abstract class Sprite {
 		// r2 is Ball3
 		Rectangle r2 = new Rectangle(obj2.getX(), obj2.getY(), obj2.getWidth(), obj2.getWidth());
 
-		if (r1.intersects(r2)) {
-			// do something
 
-		}
 
 		return r1.intersects(r2);
 	}
@@ -157,9 +155,7 @@ public abstract class Sprite {
 		// r2 is Ball4
 		Rectangle r2 = new Rectangle(obj3.getX(), obj3.getY(), obj3.getWidth()-40, obj3.getWidth()-40);
 
-		if (r1.intersects(r2)) {
-			// do something
-		}
+
 
 		return r1.intersects(r2);
 	}
@@ -175,9 +171,6 @@ public abstract class Sprite {
 		// r2 is Ball4
 		Rectangle r2 = new Rectangle(obj3.getX(), obj3.getY(), obj3.getWidth(), obj3.getWidth());
 
-		if (r1.intersects(r2)) {
-			// do something
-		}
 
 		return r1.intersects(r2);
 
