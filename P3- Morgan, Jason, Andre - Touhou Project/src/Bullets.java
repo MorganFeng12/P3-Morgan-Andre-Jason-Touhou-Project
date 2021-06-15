@@ -3,7 +3,14 @@ public class Bullets extends Sprite{
 
 	public Bullets(String fileName) {
 		super(fileName);
-		// TODO Auto-generated constructor stub
+
+		vx = 8;
+		width = 50;
+		height = 50;
+
+		Enemy = false;
+		bullet = true;
+		
 	}
 
 }
