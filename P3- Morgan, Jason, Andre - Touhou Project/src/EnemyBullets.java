@@ -1,9 +1,9 @@
 
 public class EnemyBullets extends Sprite {
-
+	//reads in the file
 	public EnemyBullets(String fileName) {
 		super(fileName);
-
+		//sets all of the instance variables to their right balue
 		width = 25;
 		height = 25;
 		x = 750;

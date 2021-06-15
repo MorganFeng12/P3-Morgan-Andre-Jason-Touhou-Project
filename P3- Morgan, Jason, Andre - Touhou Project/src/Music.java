@@ -11,6 +11,8 @@ import javax.sound.sampled.LineListener;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Music  implements Runnable  {
+	//class to play the music referenced in the driver
+	
 	Thread t;
 	File audioFile ;
     AudioInputStream audioStream;

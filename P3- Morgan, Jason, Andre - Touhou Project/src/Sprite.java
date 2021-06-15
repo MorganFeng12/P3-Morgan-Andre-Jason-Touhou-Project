@@ -79,6 +79,8 @@ public abstract class Sprite {
 		tx.setToTranslation(x, y);
 		x += vx;
 		y += vy;
+		//moves the enemeis in from off their screen until they reach the desired stop distance
+		//where they oscillate up and down at varied velocities
 		if (x < stopDist && Enemy && vx != 0) {
 			vx = 0;
 			vy = (int) (Math.random() * 10 - 5);
@@ -88,7 +90,7 @@ public abstract class Sprite {
 			
 
 		}
-		
+		//differntiate between the small enemy and boss boundaries to make sure they stay on the screen
 		if (y <= -25 || y >= 500 && Enemy && bmove == false) {
 			vy *= -1;
 		}
@@ -98,7 +100,7 @@ public abstract class Sprite {
 			}
 		}
 		
-		
+		//if the bullet runs off the screen, it is reshot
 		if ((bullet && x >= 800) || (bullet && x <= 0)) {
 			x = sX;
 			y = sY;
@@ -106,16 +108,16 @@ public abstract class Sprite {
 		
 
 	}
-
+	//moves player up 
 	public void moveUp() {
 		if (y > 0) {
-			y -= 35;
+			y -= 50;
 		}
 	}
-
+	//moves player down
 	public void moveDown() {
 		if (y < 430) {
-			y += 35;
+			y += 50;
 		}
 	}
 
@@ -124,7 +126,7 @@ public abstract class Sprite {
 		sY = y1;
 
 	}
-
+	//collide with the object and the players bullets
 	public boolean collide(Bullets obj) {
 
 		// represent both objects as Rectangles,
@@ -140,6 +142,7 @@ public abstract class Sprite {
 		return r1.intersects(r2);
 	}
 	
+	//collision with the boss
 	public boolean collide(Boss obj8) {
 
 		// represent both objects as Rectangles,
@@ -154,7 +157,8 @@ public abstract class Sprite {
 
 		return r1.intersects(r2);
 	}
-
+	
+	//collision with the player
 	public boolean collide(Sasuke obj2) {
 
 		// represent both objects as Rectangles,
@@ -170,6 +174,7 @@ public abstract class Sprite {
 		return r1.intersects(r2);
 	}
 
+	//collision with the bat enemies
 	public boolean collide(Enemy obj3) {
 
 		// represent both objects as Rectangles,
@@ -185,7 +190,7 @@ public abstract class Sprite {
 		return r1.intersects(r2);
 	}
 	
-
+	//collision with enemybullets
 	public boolean collide(EnemyBullets obj3) {
 
 		// represent both objects as Rectangles,

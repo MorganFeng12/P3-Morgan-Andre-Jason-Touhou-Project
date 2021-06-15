@@ -27,22 +27,14 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Font verdana2 = new Font("Verdana", Font.BOLD, 35);
 	int count = 0;
 	int boss = 0;
-	// Heart h1, h2, h3;
 	Sasuke s;
-	// Sasuke s2;
 	Music m1, m2;
 	int score = 0;
-int end = 0;
-	int lives = 3;
+	int end = 0;
+	int lives = 20;
 	int bosslives = 6;
 	int bosslives2 = 6;
 	int mouseclicked = 0;
-	// Enemy[] enemies = new Enemy[10];
-	// AndreEnemy e;
-	Player p1;
-	// Ball2[] obj;
-	// Ball3[] obj2;
-	// Ball4[] obj3;
 	Enemy[] enemies = new Enemy[10];
 	Enemy[] enemies2 = new Enemy[10];
 	BossBullets[] naruto = new BossBullets[3];
@@ -52,11 +44,8 @@ int end = 0;
 	int[] eY = new int[7];
 	Boss boss1;
 	Boss boss2;
-
 	int cntr = 0;
-
 	Bullets b;
-
 	EnemyBullets[] bull = new EnemyBullets[7];
 	EnemyBullets[] bull2 = new EnemyBullets[7];
 	Enemy[] bats2 = new Enemy[7];
@@ -66,12 +55,14 @@ int end = 0;
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 
+		//loading in the background 
 		if (boss == 0) {
 			d.paint(g);
 		} else {
 			i.paint(g);
 		}
 
+		//launching the loading screen
 		if (count == 0) {
 			g.setFont(verdana);
 			g.setColor(Color.blue);
@@ -82,9 +73,10 @@ int end = 0;
 			g.setColor(Color.black);
 			g.drawString("Start Game", 240, 400);
 		}
-
+		//first wave of enemies and bosses
 		if (count == 1) {
-
+			//spawning in the 10 non-shooting enemies  and sensing if the players bullets collide
+			//if there is collision, the enemies are teleported off and the score increases
 			for (int i = 0; i < enemies.length; i++) {
 				enemies[i].paint(g);
 
@@ -96,7 +88,7 @@ int end = 0;
 				}
 
 			}
-
+			//putting the lives and score system onto the screen
 			g.setFont(verdana2);
 			g.setColor(Color.black);
 			g.drawString("Lives: " + lives, 15, 45);
@@ -105,23 +97,11 @@ int end = 0;
 			s.paint(g);
 
 			b.paint(g);
-
-			for (int i = 0; i < enemies.length; i++) {
-				enemies[i].paint(g);
-				if (b.collide(enemies[i])) {
-					cntr++;
-
-					enemies[i].setX(-5000);
-					enemies[i].setY((int) (Math.random() * 10000));
-					score++;
-
-				}
-				if (b.getX() >= 800) {
-					cntr++;
-					System.out.println("2");
-				}
-			}
-
+			
+			//painting the shooting enemies, which also includes the collision mechanism, where if the 
+			//players bullet collides with the enemy, they are teleported off and the score increases
+			//also, if the shooting enemies bullet hits the player, the player loses a life
+			
 			for (int i = 0; i < 7; i++) {
 				bats[i].paint(g);
 				bull[i].paint(g);
@@ -148,10 +128,12 @@ int end = 0;
 			int sY1 = s.getY();
 			b.update(sX1 + 150, sY1 + 60);
 
+			//once the first wave is done, this part spawns in the boss
 			if (score == 17) {
 				boss1.paint(g);
 				int nX = boss1.getX();
 				int nY = boss1.getY();
+				//detects the boss's bullets collision with the player
 				for (int i = 0; i < naruto.length; i++) {
 					naruto[i].update(nX, nY);
 					naruto[i].paint(g);
@@ -161,6 +143,8 @@ int end = 0;
 
 					}
 				}
+				//if player bullets collides with the boss, it removes a bosslive, and since the boss has 6 lives
+				//once its lives are 0, it will be teleported off the screen and the score increases by 10
 				if (b.collide(boss1)) {
 					b.setX(2000);
 					b.setY(-2000);
@@ -173,6 +157,8 @@ int end = 0;
 				}
 
 			}
+			
+			//once boss killed, the new background is loaded in as well the 7 new shooting enemies
 			if (score >= 27) {
 				boss++;
 				for (int i = 0; i < 7; i++) {
@@ -182,14 +168,14 @@ int end = 0;
 					eY2[i] = bats2[i].getY();
 					bull2[i].update(eX2[i], eY2[i]);
 				}
-
+				//collision with the player, if it hits, lives goes down 1 and the bullet is teleported
 				for (int i = 0; i < bull2.length; i++) {
 					if (bull2[i].collide(s)) {
 						lives--;
 						bull2[i].setX(-5000);
 					}
 				}
-
+				//if the players bullets hits the bat, the score goes up and the bat is teleported off
 				for (int i = 0; i < bats2.length; i++) {
 					if (b.collide(bats2[i])) {
 						score++;
@@ -201,10 +187,11 @@ int end = 0;
 				}
 
 			}
-
+			//once the second wave of small enemies is over, the second boss spawns
 			if (score > 33) {
 				boss2.paint(g);
 				int nX1 = boss2.getX();
+				//boss bullets collision with player
 				int nY1 = boss2.getY();
 				for (int i = 0; i < zab.length; i++) {
 					zab[i].update(nX1, nY1);
@@ -214,34 +201,36 @@ int end = 0;
 						zab[i].setX(-5000);
 
 					}
-				
-				if (b.collide(boss2)) {
-					b.setX(2000);
-					b.setY(-2000);
-					bosslives2--;
-					if (bosslives2 == 0) {
-						boss2.setX(10000);
-						boss2.setY(-3000);
-						score += 10;
+				//player bullets collision with boss
+					if (b.collide(boss2)) {
+						b.setX(2000);
+						b.setY(-2000);
+						bosslives2--;
+						if (bosslives2 == 0) {
+							boss2.setX(10000);
+							boss2.setY(-3000);
+							score += 10;
+						}
 					}
-}
 
 				}
 			}
-
+			//44 is the max score, so if it is reached, the player has beat the game and the end screen pops up
 			if (score >= 44) {
 				count++;
 
 			}
 
+			//if the player has 0 lives, it has died, and the game is also over
 			if (lives <= 0) {
 				count++;
 
 			}
 
 		}
-		if(count == 2) {
-			if(lives == 0) {
+		if (count == 2) {
+			//if the player died, it prints a try again sign
+			if (lives == 0) {
 				g.setColor(Color.orange);
 				g.fillRect(70, 130, 650, 300);
 				g.setFont(verdana);
@@ -249,28 +238,16 @@ int end = 0;
 				g.drawString("Game Over", 142, 250);
 				g.setFont(verdana1);
 				g.drawString("Try Again Next Time!", 100, 350);
-				/*
-				g.setColor(Color.orange);
-				g.fillRect(200, 450, 400, 110);
-				g.setFont(verdana1);
-				g.setColor(Color.black);
-				g.drawString("Play Again", 250, 520);
-				*/
-			}
-			else{
+			} 
+			//if the player didn't die, they beat the game and a congratulations sign pops up
+			else {
 				g.setColor(Color.orange);
 				g.fillRect(70, 130, 650, 300);
 				g.setFont(verdana);
 				g.setColor(Color.black);
 				g.drawString("Game Over", 142, 250);
 				g.drawString("Good Job!", 168, 350);
-				/*
-				g.setColor(Color.orange);
-				g.fillRect(200, 450, 400, 110);
-				g.setFont(verdana1);
-				g.setColor(Color.black);
-				g.drawString("Play Again", 250, 520);
-				*/
+
 			}
 		}
 	}
@@ -299,16 +276,10 @@ int end = 0;
 
 		// connect JFrame to MouseMotionListener if necessary
 
-		// setup animation timer
-		// animationTimer = new Timer(30, this);
-
-		// setup animation timer
-		// animationTimer = new Timer(16, this);
 
 		animationTimer.start();
 
 		// instantiate the rest of the instance variables
-
 		s = new Sasuke("Sasuke.png");
 		b = new Bullets("Fireball.png");
 
@@ -319,15 +290,7 @@ int end = 0;
 		m1 = new Music("Naruto1.wav", true);
 		m1.play();
 
-		/*
-		 * h1 = new Heart("heart (2).png"); h2 = new Heart("heart (2).png"); h3 = new
-		 * Heart("heart (2).png");
-		 */
-
-		// obj = new Ball2[10];
-		// obj2 = new Ball3[10];
-		// obj3 = new Ball4[10];
-
+		//loops for all of teh arrays instantiating them as their specific png or gif
 		for (int i = 0; i < 7; i++) {
 			bats[i] = new Enemy("Bat6.png");
 		}
@@ -350,23 +313,9 @@ int end = 0;
 		for (int k = 0; k < 7; k++) {
 			bull[k] = new EnemyBullets("Fireball.png");
 		}
-		// -------------------------------
-
-		// p1 = new Player("Sasuke.png");
 
 		boss1 = new Boss("naruto.png");
 		boss2 = new Boss("Zabuza4.png");
-
-		// e = new AndreEnemy();
-		/*
-		 * for (int i = 0; i < 10; i++) { obj[i] = new Ball2(); }
-		 * 
-		 * for (int j = 0; j < 10; j++) { obj2[j] = new Ball3(); }
-		 * 
-		 * for (int k = 0; k < 10; k++) { obj3[k] = new Ball4(); }
-		 */
-
-		// m1.play();
 
 		for (int i = 0; i < enemies.length; i++) {
 			enemies[i] = new Enemy("Bat6.png");
@@ -393,19 +342,11 @@ int end = 0;
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-
+		//is w or s is pressed on the keyboard, the player moves up/down respectively
 		switch (arg0.getKeyCode()) {
 		case 87:
-
-			// move the left paddle up
 			b.moveUp();
-			// System.out.println("case 87");
 
-			// move the avatar up and down
-			// s.moveUp();
-			System.out.println("case 87");
-
-			// move the avatar up and down
 			s.moveUp();
 
 			break;
@@ -465,6 +406,7 @@ int end = 0;
 	@Override
 	public void mouseClicked(MouseEvent m) {
 		// TODO Auto-generated method stub
+		//checks if the user has pressed the start button, and if they have, launches up the game
 		if (count == 0) {
 			Rectangle bR = new Rectangle(220, 365, 360, 150);
 			Rectangle mR = new Rectangle(m.getX(), m.getY(), 200, 140);
@@ -476,17 +418,7 @@ int end = 0;
 				count++;
 			}
 		}
-/*
-		else {
-			Rectangle bR1 = new Rectangle(200, 450, 400, 110);
-			Rectangle mR1 = new Rectangle(m.getX(), m.getY(), 400, 110);
-			if (bR1.intersects(mR1)) {
-				count = 0;
-				boss = 0;
-				score = 0;
-			}
-		}
-*/
+
 	}
 
 	@Override
