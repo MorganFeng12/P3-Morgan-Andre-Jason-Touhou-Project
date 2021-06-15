@@ -139,6 +139,21 @@ public abstract class Sprite {
 
 		return r1.intersects(r2);
 	}
+	
+	public boolean collide(Boss obj8) {
+
+		// represent both objects as Rectangles,
+		// use the intersect command to check for collision
+
+		Rectangle r1 = new Rectangle(x, y, width, width);
+
+		// r2 is Ball2
+		Rectangle r2 = new Rectangle(obj8.getX(), obj8.getY(), obj8.getWidth(), obj8.getWidth());
+
+
+
+		return r1.intersects(r2);
+	}
 
 	public boolean collide(Sasuke obj2) {
 
@@ -185,6 +200,7 @@ public abstract class Sprite {
 		return r1.intersects(r2);
 
 	}
+	
 
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
 

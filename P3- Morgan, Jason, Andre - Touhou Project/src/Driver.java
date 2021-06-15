@@ -27,31 +27,41 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Font verdana2 = new Font("Verdana", Font.BOLD, 35);
 	int count = 0;
 	int boss = 0;
-	//Heart h1, h2, h3;
+	// Heart h1, h2, h3;
 	Sasuke s;
 	// Sasuke s2;
 	Music m1, m2;
 	int score = 0;
-
+int end = 0;
 	int lives = 3;
+	int bosslives = 6;
+	int bosslives2 = 6;
 	int mouseclicked = 0;
 	// Enemy[] enemies = new Enemy[10];
 	// AndreEnemy e;
 	Player p1;
-	Ball2[] obj;
-	Ball3[] obj2;
-	Ball4[] obj3;
+	// Ball2[] obj;
+	// Ball3[] obj2;
+	// Ball4[] obj3;
 	Enemy[] enemies = new Enemy[10];
+	Enemy[] enemies2 = new Enemy[10];
+	BossBullets[] naruto = new BossBullets[3];
+	BossBullets[] zab = new BossBullets[3];
 	Enemy[] bats = new Enemy[7];
 	int[] eX = new int[7];
 	int[] eY = new int[7];
 	Boss boss1;
+	Boss boss2;
 
 	int cntr = 0;
 
 	Bullets b;
 
 	EnemyBullets[] bull = new EnemyBullets[7];
+	EnemyBullets[] bull2 = new EnemyBullets[7];
+	Enemy[] bats2 = new Enemy[7];
+	int[] eX2 = new int[7];
+	int[] eY2 = new int[7];
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -78,14 +88,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			for (int i = 0; i < enemies.length; i++) {
 				enemies[i].paint(g);
 
-			}
-			// s.paint(g);
-
-			for (int i = 0; i < enemies.length; i++) {
-
 				if (b.collide(enemies[i])) {
-
-					System.out.println("Hi");
 
 					enemies[i].setX(-5000);
 					enemies[i].setY((int) (Math.random() * 10000));
@@ -94,24 +97,17 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 			}
 
-			int sX = s.getX();
-			int sY = s.getY();
-
 			g.setFont(verdana2);
 			g.setColor(Color.black);
 			g.drawString("Lives: " + lives, 15, 45);
 			g.drawString("Score: " + score, 300, 45);
-
-			for (int i = 0; i < enemies.length; i++) {
-				enemies[i].paint(g);
-			}
 
 			s.paint(g);
 
 			b.paint(g);
 
 			for (int i = 0; i < enemies.length; i++) {
-
+				enemies[i].paint(g);
 				if (b.collide(enemies[i])) {
 					cntr++;
 
@@ -128,84 +124,155 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 			for (int i = 0; i < 7; i++) {
 				bats[i].paint(g);
+				bull[i].paint(g);
+				if (bull[i].collide(s)) {
+					lives--;
+					bull[i].setY(2000);
+					bull[i].setX(6000);
+				}
+				if (b.collide(bats[i])) {
+					bats[i].setY(-5000);
+					score++;
+				}
+				eX[i] = bats[i].getX();
+				eY[i] = bats[i].getY();
+				bull[i].update(eX[i], eY[i]);
 			}
 
 			b.paint(g);
 
-			for (int b = 0; b < 7; b++) {
-				bull[b].paint(g);
-			}
-
-			for (int p = 0; p < 7; p++) {
-				if (bull[p].collide(s)) {
-					lives--;
-					bull[p].setY(2000);
-					bull[p].setX(6000);
-				}
-			}
-
-			for (int j = 0; j < 7; j++) {
-				if (b.collide(bats[j])) {
-					bats[j].setY(-5000);
-					score++;
-				}
-			}
-			for (int n = 0; n < 7; n++) {
-				eX[n] = bats[n].getX();
-				eY[n] = bats[n].getY();
-			}
-
-			for (int h = 0; h < 7; h++) {
-				bull[h].update(eX[h], eY[h]);
-			}
-
+			int sX = s.getX();
+			int sY = s.getY();
 			b.update(sX + 150, sY + 60);
 			int sX1 = s.getX();
 			int sY1 = s.getY();
-
 			b.update(sX1 + 150, sY1 + 60);
 
-			if (score > 16) {
+			if (score == 17) {
 				boss1.paint(g);
+				int nX = boss1.getX();
+				int nY = boss1.getY();
+				for (int i = 0; i < naruto.length; i++) {
+					naruto[i].update(nX, nY);
+					naruto[i].paint(g);
+					if (naruto[i].collide(s)) {
+						lives--;
+						naruto[i].setX(-5000);
+
+					}
+				}
+				if (b.collide(boss1)) {
+					b.setX(2000);
+					b.setY(-2000);
+					bosslives--;
+					if (bosslives == 0) {
+						boss1.setX(5000);
+						boss1.setY(-2000);
+						score += 10;
+					}
+				}
+
+			}
+			if (score >= 27) {
 				boss++;
+				for (int i = 0; i < 7; i++) {
+					bats2[i].paint(g);
+					bull2[i].paint(g);
+					eX2[i] = bats2[i].getX();
+					eY2[i] = bats2[i].getY();
+					bull2[i].update(eX2[i], eY2[i]);
+				}
+
+				for (int i = 0; i < bull2.length; i++) {
+					if (bull2[i].collide(s)) {
+						lives--;
+						bull2[i].setX(-5000);
+					}
+				}
+
+				for (int i = 0; i < bats2.length; i++) {
+					if (b.collide(bats2[i])) {
+						score++;
+						b.setX(5000);
+						bats2[i].setX(-50000);
+						bats2[i].setY(50000);
+
+					}
+				}
+
+			}
+
+			if (score > 33) {
+				boss2.paint(g);
+				int nX1 = boss2.getX();
+				int nY1 = boss2.getY();
+				for (int i = 0; i < zab.length; i++) {
+					zab[i].update(nX1, nY1);
+					zab[i].paint(g);
+					if (zab[i].collide(s)) {
+						lives--;
+						zab[i].setX(-5000);
+
+					}
+				
+				if (b.collide(boss2)) {
+					b.setX(2000);
+					b.setY(-2000);
+					bosslives2--;
+					if (bosslives2 == 0) {
+						boss2.setX(10000);
+						boss2.setY(-3000);
+						score += 10;
+					}
+}
+
+				}
+			}
+
+			if (score >= 44) {
+				count++;
+
+			}
+
+			if (lives <= 0) {
+				count++;
 
 			}
 
 		}
-
-		if (score > 20) {
-			count++;
-			g.setColor(Color.orange);
-			g.fillRect(70, 130, 650, 300);
-			g.setFont(verdana);
-			g.setColor(Color.black);
-			g.drawString("Game Over", 142, 250);
-			g.drawString("Good Job!", 168, 350);
-			g.setColor(Color.orange);
-			g.fillRect(200, 450, 400, 110);
-			g.setFont(verdana1);
-			g.setColor(Color.black);
-			g.drawString("Play Again", 250, 520);
-
+		if(count == 2) {
+			if(lives == 0) {
+				g.setColor(Color.orange);
+				g.fillRect(70, 130, 650, 300);
+				g.setFont(verdana);
+				g.setColor(Color.black);
+				g.drawString("Game Over", 142, 250);
+				g.setFont(verdana1);
+				g.drawString("Try Again Next Time!", 100, 350);
+				/*
+				g.setColor(Color.orange);
+				g.fillRect(200, 450, 400, 110);
+				g.setFont(verdana1);
+				g.setColor(Color.black);
+				g.drawString("Play Again", 250, 520);
+				*/
+			}
+			else{
+				g.setColor(Color.orange);
+				g.fillRect(70, 130, 650, 300);
+				g.setFont(verdana);
+				g.setColor(Color.black);
+				g.drawString("Game Over", 142, 250);
+				g.drawString("Good Job!", 168, 350);
+				/*
+				g.setColor(Color.orange);
+				g.fillRect(200, 450, 400, 110);
+				g.setFont(verdana1);
+				g.setColor(Color.black);
+				g.drawString("Play Again", 250, 520);
+				*/
+			}
 		}
-
-		if (lives <= 0) {
-			count++;
-			g.setColor(Color.orange);
-			g.fillRect(70, 130, 650, 300);
-			g.setFont(verdana);
-			g.setColor(Color.black);
-			g.drawString("Game Over", 142, 250);
-			g.setFont(verdana1);
-			g.drawString("Try Again Next Time!", 100, 350);
-			g.setColor(Color.orange);
-			g.fillRect(200, 450, 400, 110);
-			g.setFont(verdana1);
-			g.setColor(Color.black);
-			g.drawString("Play Again", 250, 520);
-
-		}
-
 	}
 
 	public Driver() {
@@ -257,12 +324,27 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		 * Heart("heart (2).png");
 		 */
 
-		obj = new Ball2[10];
-		obj2 = new Ball3[10];
-		obj3 = new Ball4[10];
+		// obj = new Ball2[10];
+		// obj2 = new Ball3[10];
+		// obj3 = new Ball4[10];
 
 		for (int i = 0; i < 7; i++) {
-			bats[i] = new Enemy("FlyingBat125.gif");
+			bats[i] = new Enemy("Bat6.png");
+		}
+
+		for (int b = 0; b < 3; b++) {
+			naruto[b] = new BossBullets("Fireball.png");
+		}
+
+		for (int c = 0; c < 3; c++) {
+			zab[c] = new BossBullets("Fireball.png");
+		}
+		for (int i = 0; i < bats2.length; i++) {
+			bats2[i] = new Enemy("Bat6.png");
+		}
+
+		for (int i = 0; i < bull2.length; i++) {
+			bull2[i] = new EnemyBullets("Fireball.png");
 		}
 
 		for (int k = 0; k < 7; k++) {
@@ -273,26 +355,25 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		// p1 = new Player("Sasuke.png");
 
 		boss1 = new Boss("naruto.png");
+		boss2 = new Boss("Zabuza4.png");
 
 		// e = new AndreEnemy();
-
-		for (int i = 0; i < 10; i++) {
-			obj[i] = new Ball2();
-		}
-
-		for (int j = 0; j < 10; j++) {
-			obj2[j] = new Ball3();
-		}
-
-		for (int k = 0; k < 10; k++) {
-			obj3[k] = new Ball4();
-		}
+		/*
+		 * for (int i = 0; i < 10; i++) { obj[i] = new Ball2(); }
+		 * 
+		 * for (int j = 0; j < 10; j++) { obj2[j] = new Ball3(); }
+		 * 
+		 * for (int k = 0; k < 10; k++) { obj3[k] = new Ball4(); }
+		 */
 
 		// m1.play();
 
 		for (int i = 0; i < enemies.length; i++) {
-			enemies[i] = new Enemy("Flyingbat125.gif");
+			enemies[i] = new Enemy("Bat6.png");
 
+		}
+		for (int j = 0; j < enemies2.length; j++) {
+			enemies2[j] = new Enemy("Bat6.png");
 		}
 
 		f.setVisible(true);
@@ -395,7 +476,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 				count++;
 			}
 		}
-
+/*
 		else {
 			Rectangle bR1 = new Rectangle(200, 450, 400, 110);
 			Rectangle mR1 = new Rectangle(m.getX(), m.getY(), 400, 110);
@@ -405,7 +486,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 				score = 0;
 			}
 		}
-
+*/
 	}
 
 	@Override

@@ -6,11 +6,11 @@ public class Boss extends Sprite {
 		super(fileName);
 		vy = 3;
 		vx = -7;
-		x = 550;
+		x = 580;
 		y = 250;
 		width = 150;
 		height = 150;
-		stopDist = 550;
+		stopDist = 580;
 		Enemy = true;
 		bmove = true;
 		bullet = false;
