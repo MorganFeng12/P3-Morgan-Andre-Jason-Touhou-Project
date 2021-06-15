@@ -8,7 +8,7 @@ public class EnemyBullets extends Sprite {
 		height = 25;
 		x = 750;
 		y = (int) (Math.random()*700);
-		vx = -2;
+		vx = -8;
 
 		Enemy = false;
 		bullet = true;
