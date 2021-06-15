@@ -7,6 +7,7 @@ public class Sasuke extends Sprite {
 		height = 153;
 		y = 150;
 		Enemy = false;
+		bullet = false;
 
 	}
 
