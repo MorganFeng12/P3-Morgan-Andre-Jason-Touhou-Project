@@ -32,6 +32,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Sasuke s2;
 	Music m1, m2;
 	int score = 0;
+
 	int lives = 0;
 	int mouseclicked = 0;
 	// Enemy[] enemies = new Enemy[10];
@@ -40,25 +41,46 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Ball2[] obj;
 	Ball3[] obj2;
 	Ball4[] obj3;
-	Enemy[] enemies = new Enemy[20];
+	Enemy[] enemies = new Enemy[10];
+	Enemy e1 = new Enemy("FlyingBat125.gif");
+	Enemy e2 = new Enemy("FlyingBat125.gif");
+	Enemy e3 = new Enemy("FlyingBat125.gif");
+	Enemy e4 = new Enemy("FlyingBat125.gif");
+	Enemy e5 = new Enemy("FlyingBat125.gif");
+	Enemy e6 = new Enemy("FlyingBat125.gif");
+	Enemy e7 = new Enemy("FlyingBat125.gif");
+	Enemy e8 = new Enemy("FlyingBat125.gif");
+	Enemy e9 = new Enemy("FlyingBat125.gif");
+	Enemy e10 = new Enemy("FlyingBat125.gif");
 
-	Boss b1;
+	Boss boss1;
 
 	int cntr = 0;
 
 	Bullets b;
+	EnemyBullets b1 = new EnemyBullets("Fireball.png");
+	EnemyBullets b2 = new EnemyBullets("Fireball.png");
+	EnemyBullets b3 = new EnemyBullets("Fireball.png");
+	EnemyBullets b4 = new EnemyBullets("Fireball.png");
+	EnemyBullets b5 = new EnemyBullets("Fireball.png");
+	EnemyBullets b6 = new EnemyBullets("Fireball.png");
+	EnemyBullets b7 = new EnemyBullets("Fireball.png");
+	EnemyBullets b8 = new EnemyBullets("Fireball.png");
+	EnemyBullets b9 = new EnemyBullets("Fireball.png");
+	EnemyBullets b10 = new EnemyBullets("Fireball.png");
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 
+
 		if (boss == 0) {
 			d.paint(g);
 		}
-
 		else {
 			i.paint(g);
 		}
-
+	
+	
 		if (count == 0) {
 			g.setFont(verdana);
 			g.setColor(Color.blue);
@@ -70,7 +92,52 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			g.drawString("Start Game", 240, 400);
 		}
 
+
 		if (count == 1) {
+
+			for (int i = 0; i < enemies.length; i++) {
+				enemies[i].paint(g);
+
+			}
+			s.paint(g);
+
+			b.paint(g);
+			e1.paint(g);
+			e2.paint(g);
+			e3.paint(g);
+			e4.paint(g);
+			e5.paint(g);
+			e6.paint(g);
+			e7.paint(g);
+			e8.paint(g);
+			e9.paint(g);
+			e10.paint(g);
+			b1.paint(g);
+			b2.paint(g);
+			b3.paint(g);
+			b4.paint(g);
+			b5.paint(g);
+			b6.paint(g);
+			b7.paint(g);
+			b8.paint(g);
+			b9.paint(g);
+			b10.paint(g);
+			for (int i = 0; i < enemies.length; i++) {
+
+				if (b.collide(enemies[i])) {
+
+					System.out.println("Hi");
+
+					enemies[i].setX(-5000);
+					enemies[i].setY((int) (Math.random() * 10000));
+					score++;
+				}
+
+
+			}
+
+			int sX = s.getX();
+			int sY = s.getY();
 			// s.paint(g);
 			h1.paint(g);
 			h2.setX(h1.getX() + 45);
@@ -105,17 +172,52 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 					System.out.println("2");
 				}
 			}
-			int sX = s.getX();
-			int sY = s.getY();
+
+			int e1X = e1.getX();
+			int e1Y = e1.getY();
+			int e2X = e2.getX();
+			int e2Y = e2.getY();
+			int e3X = e3.getX();
+			int e3Y = e3.getY();
+			int e4X = e4.getX();
+			int e4Y = e4.getY();
+			int e5X = e5.getX();
+			int e5Y = e5.getY();
+			int e6X = e6.getX();
+			int e6Y = e6.getY();
+			int e7X = e7.getX();
+			int e7Y = e7.getY();
+			int e8X = e8.getX();
+			int e8Y = e8.getY();
+			int e9X = e9.getX();
+			int e9Y = e9.getY();
+			int e10X = e10.getX();
+			int e10Y = e10.getY();
+			
+			b1.update(e1X, e1Y);
+			b2.update(e2X, e2Y);
+			b3.update(e3X, e3Y);
+			b4.update(e4X, e4Y);
+			b5.update(e5X, e5Y);
+			b6.update(e6X, e6Y);
+			b7.update(e7X, e7Y);
+			b8.update(e8X, e8Y);
+			b9.update(e9X, e9Y);
+			b10.update(e10X, e10Y);
+			
 
 			b.update(sX + 150, sY + 60);
+			int sX1 = s.getX();
+			int sY1 = s.getY();
 
-			if (score >= 20) {
-				b1.setX(570);
-				b1.setY(200);
-				b1.paint(g);
-				boss++;
-				b1.update();
+			b.update(sX1 + 150, sY1 + 60);
+
+			if (score > 5) {
+				boss1.setX(570);
+				boss1.setY(200);
+				boss1.paint(g);
+				//boss++;
+				boss1.update();
 			}
 
 		}
@@ -184,6 +286,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 		s = new Sasuke("Sasuke.png");
 		b = new Bullets("Fireball.png");
+
 		i = new Background("ice1.gif");
 		forest = new Background("Forest.gif");
 		d = new Desert("desert1.gif");
@@ -203,7 +306,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 		p1 = new Player("Sasuke.png");
 
-		b1 = new Boss("naruto.png");
+		boss1 = new Boss("naruto.png");
 
 		// e = new AndreEnemy();
 
@@ -219,6 +322,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			obj3[k] = new Ball4();
 		}
 
+		// m1.play();
+
+
 		for (int i = 0; i < enemies.length; i++) {
 			enemies[i] = new Enemy("Flyingbat125.gif");
 
@@ -233,12 +339,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	/* this method is invoked/called by the timer */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-
-		// call the frame to refresh
-		// update();
-
-		// call the frame to refresh
-		// repaint();
 
 		// call the frame to refresh
 		repaint();

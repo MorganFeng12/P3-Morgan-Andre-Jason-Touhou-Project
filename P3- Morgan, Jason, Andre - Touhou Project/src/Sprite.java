@@ -56,6 +56,10 @@ public abstract class Sprite {
 	public void setStopDist(int stopDist) {
 		this.stopDist = stopDist;
 	}
+	
+	public int getStopDist() {
+		return stopDist;
+	}
 
 	public int getHeight() {
 		return height;
@@ -87,7 +91,7 @@ public abstract class Sprite {
 			vy *= -1;
 		}
 		
-		if (bullet && x >= 800) {
+		if ((bullet && x >= 800) || (bullet && x <= 0)) {
 			x = sX;
 			y = sY;
 		}
@@ -97,13 +101,13 @@ public abstract class Sprite {
 
 	public void moveUp() {
 		if (y > 0) {
-			y -= 16;
+			y -= 25;
 		}
 	}
 
 	public void moveDown() {
 		if (y < 430) {
-			y += 16;
+			y += 25;
 		}
 	}
 
