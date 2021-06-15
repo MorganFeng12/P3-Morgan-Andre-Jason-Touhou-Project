@@ -88,7 +88,7 @@ public abstract class Sprite {
 			vy *= -1;
 		}
 		
-		if ((bullet && x >= 800) || (bullet && x <= 0)) {
+		if ((bullet && x >= 800) || (bullet && x <= -100)) {
 			x = sX;
 			y = sY;
 		}

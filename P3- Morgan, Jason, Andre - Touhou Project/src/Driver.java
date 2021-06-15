@@ -24,7 +24,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Sasuke s2;
 	Music m1;
 	int score = 0;
-	Enemy[] enemies = new Enemy[10];
+	Enemy[] enemies = new Enemy[13];
 	Enemy e1 = new Enemy("FlyingBat125.gif");
 	Enemy e2 = new Enemy("FlyingBat125.gif");
 	Enemy e3 = new Enemy("FlyingBat125.gif");
@@ -32,9 +32,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Enemy e5 = new Enemy("FlyingBat125.gif");
 	Enemy e6 = new Enemy("FlyingBat125.gif");
 	Enemy e7 = new Enemy("FlyingBat125.gif");
-	Enemy e8 = new Enemy("FlyingBat125.gif");
-	Enemy e9 = new Enemy("FlyingBat125.gif");
-	Enemy e10 = new Enemy("FlyingBat125.gif");
+//	Enemy e8 = new Enemy("FlyingBat125.gif");
+//	Enemy e9 = new Enemy("FlyingBat125.gif");
+//	Enemy e10 = new Enemy("FlyingBat125.gif");
 
 	int cntr = 0;
 
@@ -69,9 +69,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		e5.paint(g);
 		e6.paint(g);
 		e7.paint(g);
-		e8.paint(g);
-		e9.paint(g);
-		e10.paint(g);
+//		e8.paint(g);
+//		e9.paint(g);
+//		e10.paint(g);
 		b1.paint(g);
 		b2.paint(g);
 		b3.paint(g);
@@ -83,7 +83,65 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		b9.paint(g);
 		b10.paint(g);
 		
+		if (b1.collide(s)) {
+			//filler
+		}
 		
+		if (b2.collide(s)) {
+			//filler
+		}
+		if (b3.collide(s)) {
+			//filler
+		}
+		if (b4.collide(s)) {
+			//filler
+		}
+		if (b5.collide(s)) {
+			//filler
+		}
+		if (b6.collide(s)) {
+			//filler
+		}
+		if (b7.collide(s)) {
+			//filler
+		}
+		
+		if (b.collide(e1)) {
+			e1.setX(-5000);
+			e1.setY((int) (Math.random()*10000-5000));
+		}
+		
+		if (b.collide(e2)) {
+			e2.setX(-5000);
+			e2.setY((int) (Math.random()*10000-5000));
+		}
+		
+		if (b.collide(e3)) {
+			e3.setX(-5000);
+			e3.setY((int) (Math.random()*10000-5000));
+		}
+		
+		if (b.collide(e4)) {
+			e4.setX(-5000);
+			e4.setY((int) (Math.random()*10000-5000));
+		}
+		
+		if (b.collide(e5)) {
+			e5.setX(-5000);
+			e5.setY((int) (Math.random()*10000-5000));
+		}
+		
+		if (b.collide(e6)) {
+			e6.setX(-5000);
+			e6.setY((int) (Math.random()*10000-5000));
+		}
+		
+		if (b.collide(e7)) {
+			e7.setX(-5000);
+			e7.setY((int) (Math.random()*10000-5000));
+		}
+		
+
 		for (int i = 0; i < enemies.length; i++) {
 
 			if (b.collide(enemies[i])) {
@@ -114,12 +172,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		int e6Y = e6.getY();
 		int e7X = e7.getX();
 		int e7Y = e7.getY();
-		int e8X = e8.getX();
-		int e8Y = e8.getY();
-		int e9X = e9.getX();
-		int e9Y = e9.getY();
-		int e10X = e10.getX();
-		int e10Y = e10.getY();
+//		int e8X = e8.getX();
+//		int e8Y = e8.getY();
+//		int e9X = e9.getX();
+//		int e9Y = e9.getY();
+//		int e10X = e10.getX();
+//		int e10Y = e10.getY();
 		
 		b1.update(e1X, e1Y);
 		b2.update(e2X, e2Y);
@@ -128,10 +186,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		b5.update(e5X, e5Y);
 		b6.update(e6X, e6Y);
 		b7.update(e7X, e7Y);
-		b8.update(e8X, e8Y);
-		b9.update(e9X, e9Y);
-		b10.update(e10X, e10Y);
-		
+//		b8.update(e8X, e8Y);
+//		b9.update(e9X, e9Y);
+//		b10.update(e10X, e10Y);
+//		
 
 		b.update(sX + 150, sY + 60);
 
