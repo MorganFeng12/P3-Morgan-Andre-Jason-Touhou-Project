@@ -117,34 +117,35 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 				boss++;
 				b1.update();
 			}
-			
+
 		}
-		
-		if(score > 3) {
+
+		if (score > 20) {
 			count++;
-			
+
 			g.setColor(Color.orange);
 			g.fillRect(70, 130, 650, 300);
 			g.setFont(verdana);
 			g.setColor(Color.black);
 			g.drawString("Game Over", 142, 250);
 			g.drawString("Good Job!", 168, 350);
-			
-		}
-		
-		/*
-		if(lives == 0) {
-			
 			g.setColor(Color.orange);
-			g.fillRect(70, 130, 650, 300);
-			g.setFont(verdana);
-			g.setColor(Color.black);
-			g.drawString("Game Over", 142, 250);
+			g.fillRect(200, 450, 400, 110);
 			g.setFont(verdana1);
-			g.drawString("Try Again Next Time!", 100, 350);
-			
+			g.setColor(Color.black);
+			g.drawString("Play Again", 250, 520);
+
 		}
-		*/
+
+		/*
+		 * if(lives == 0) {
+		 * 
+		 * g.setColor(Color.orange); g.fillRect(70, 130, 650, 300); g.setFont(verdana);
+		 * g.setColor(Color.black); g.drawString("Game Over", 142, 250);
+		 * g.setFont(verdana1); g.drawString("Try Again Next Time!", 100, 350);
+		 * 
+		 * }
+		 */
 	}
 
 	public Driver() {
@@ -318,14 +319,26 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void mouseClicked(MouseEvent m) {
 		// TODO Auto-generated method stub
-		Rectangle bR = new Rectangle(220, 365, 360, 150);
-		Rectangle mR = new Rectangle(m.getX(), m.getY(), 200, 140);
+		if (count == 0) {
+			Rectangle bR = new Rectangle(220, 365, 360, 150);
+			Rectangle mR = new Rectangle(m.getX(), m.getY(), 200, 140);
 
-		if (bR.intersects(mR)) {
-			mouseclicked++;
+			if (bR.intersects(mR)) {
+				mouseclicked++;
+			}
+			if (mouseclicked == 1) {
+				count++;
+			}
 		}
-		if(mouseclicked == 1) {
-			count++;
+		
+		else {
+			Rectangle bR1 = new Rectangle(200, 450, 400, 110);
+			Rectangle mR1 = new Rectangle(m.getX(), m.getY(), 400, 110);
+			if (bR1.intersects(mR1)) {
+				count = 0;
+				boss = 0;
+				score = 0;
+			}
 		}
 
 	}
